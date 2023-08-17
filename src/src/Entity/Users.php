@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UsersRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-class Users
+class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -166,5 +169,41 @@ class Users
         $this->username = $username;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        // Pour l'instant, tous les utilisateurs ont seulement le rôle USER.
+        // Vous pouvez changer cela en fonction de votre application.
+        return ['ROLE_USER'];
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        // Vous n'avez pas besoin d'une vraie "salt" avec les algorithmes modernes de hachage.
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // Si vous stockez des informations sensibles temporairement sur l'utilisateur, effacez-les ici.
+        // Par exemple : $this->plainPassword = null;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface (introduit dans Symfony 5.3, vous devriez avoir cette version pour utiliser cette interface)
+     */
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
     }
 }
