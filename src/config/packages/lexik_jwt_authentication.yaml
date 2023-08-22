@@ -1,4 +1,19 @@
 lexik_jwt_authentication:
-    secret_key: '%env(resolve:JWT_SECRET_KEY)%'
-    public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
-    pass_phrase: '%env(JWT_PASSPHRASE)%'
+    private_key_path: '%kernel.project_dir%/config/jwt/private.pem'   # chemin vers la clé privée
+    public_key_path: '%kernel.project_dir%/config/jwt/public.pem'     # chemin vers la clé publique
+    pass_phrase: '%env(JWT_PASSPHRASE)%'                               # passphrase pour les clés
+    token_ttl: 3600                                                    # durée de vie du token en secondes
+
+    # Encoder
+    encoder:
+        signature_algorithm: HS256                                     # Algorithme utilisé
+
+    # Configuration du cookie pour stocker le JWT
+    set_cookies:
+        token:                                                        # nom du cookie
+            lifetime: null                                            # durée de vie du cookie en secondes (null pour une session)
+            samesite: 'strict'                                        # stratégie de same-site
+            path: '/'                                                 # chemin du cookie
+            domain: null                                              # domaine du cookie
+            httponly: true                                            # le cookie ne peut pas être accédé via JavaScript
+            secure: false                                              # le cookie est envoyé uniquement sur des connexions sécurisées (HTTPS)

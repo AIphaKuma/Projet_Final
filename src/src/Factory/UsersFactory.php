@@ -7,6 +7,7 @@ use App\Repository\UsersRepository;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @extends ModelFactory<Users>
@@ -29,45 +30,35 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class UsersFactory extends ModelFactory
 {
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
-     */
-    public function __construct()
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         parent::__construct();
+        $this->passwordHasher = $passwordHasher;
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
     protected function getDefaults(): array
     {
         return [
-            'adress' => self::faker()->address(),
-            'category' => self::faker()->randomNumber(),
-            'country' => self::faker()->country(),
-            'created_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'first_name' => self::faker()->firstName(),
-            'last_name' => self::faker()->firstName(),
+            'last_name' => self::faker()->lastName(),
+            'address' => self::faker()->address(),
+            'country' => self::faker()->country(),
+            'phone_number' => self::faker()->randomNumber(9),
+            'category' => self::faker()->numberBetween(1,10),  // supposons qu'il y ait 10 catégories
             'mail' => self::faker()->email(),
-            'password' => self::faker()->password(),
-            'phone_number' => self::faker()->randomNumber(),
             'username' => self::faker()->userName(),
+            'role' => self::faker()->randomElement([1,2]), // supposons que vous ayez 3 rôles avec des ID 1, 2 et 3
+            'created_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-     */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Users $users): void {})
-        ;
+        return $this->afterInstantiate(function (Users $user): void {
+            $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
+        });
     }
 
     protected static function getClass(): string
