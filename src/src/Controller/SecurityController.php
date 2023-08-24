@@ -6,11 +6,11 @@ use App\Entity\Users;
 use App\Repository\UsersRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 class SecurityController extends AbstractController
 {
     private JWTTokenManagerInterface $jwtManager;
@@ -22,9 +22,7 @@ class SecurityController extends AbstractController
         $this->jwtManager = $jwtManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
-
     }
-
 
     #[Route('/login', name: 'login')]
     public function login(Request $request): Response
@@ -40,19 +38,27 @@ class SecurityController extends AbstractController
             return $this->json(['message' => 'Invalid credentials'], 401);
         }
 
+        //$this->jwtManager->create($user); // Crée le token. Lexik s'occupe du reste.
         $token = $this->jwtManager->create($user);
+        return $this->json([
+            'message' => 'Connexion réussie',
+            'token' => $token,
+            'user' => [
+                'username' => $user->getUsername(),
+                'role' => $user->getRole(),
+       ]
+            ],200);
 
-        $response = new Response();
-        $response->headers->setCookie(new Cookie(
-            'AUTH_TOKEN',
-            $token,
-            (new \DateTime())->modify('+1 day'),
-            '/',
-            null,
-            true
-        ));
-        return $this->json(['message' => 'Connexion réussie'], 200, [], $response->headers->all());
     }
+
+    #[Route('/logout', name: 'logout')]
+    public function logout(): Response
+    {
+        $response = new Response();
+        $response->headers->clearCookie('token');
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
 
     private function isPasswordValid(Users $user, string $rawPassword): bool
     {

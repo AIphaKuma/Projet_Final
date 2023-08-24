@@ -15,5 +15,5 @@ lexik_jwt_authentication:
             samesite: 'strict'                                        # stratégie de same-site
             path: '/'                                                 # chemin du cookie
             domain: null                                              # domaine du cookie
-            httponly: true                                            # le cookie ne peut pas être accédé via JavaScript
+            httpOnly: true                                            # le cookie ne peut pas être accédé via JavaScript
             secure: false                                              # le cookie est envoyé uniquement sur des connexions sécurisées (HTTPS)
