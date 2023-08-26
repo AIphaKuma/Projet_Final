@@ -1,0 +1,31 @@
+@import "colors";
+
+//////  < 599, 541-768, 1024-1199, 1200+ px
+$breakPointPhoneOnly: 37.438em; // 599px
+$breakPointTabletPortraitUp: 37.5em; // 600px
+$breakPointTabletLandscapeUp: 56.250em; // 900px
+$breakPointDeskTopUp: 80em; // 1300px
+
+@mixin forPhoneOnly {
+  @media (max-width: $breakPointPhoneOnly) {
+    @content;
+  }
+}
+
+@mixin forTabletPortraitUp {
+  @media (min-width: $breakPointTabletPortraitUp) {
+    @content;
+  }
+}
+
+@mixin forTabletLandscapeUp {
+  @media (min-width: $breakPointTabletLandscapeUp) {
+    @content;
+  }
+}
+
+@mixin forDesktopUp {
+  @media (min-width: $breakPointDeskTopUp) {
+    @content;
+  }
+}

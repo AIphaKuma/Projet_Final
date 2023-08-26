@@ -1,0 +1,30 @@
+
+
+.container{
+  margin-left: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.container2 {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 40px;
+  margin-right: 40px;
+
+}
+.cards-container{
+  display: flex;
+  flex-direction: row;
+}
+.text-container {
+  .gradient-text{
+    margin: 20px 800px 20px 0;
+    text-align: left
+  }
+  h2 {
+    text-align: left;
+    margin: 40px 0 40px;
+  }
+}

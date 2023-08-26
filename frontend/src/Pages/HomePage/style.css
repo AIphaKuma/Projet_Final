@@ -1,0 +1,30 @@
+@charset "UTF-8";
+body {
+  background-color: #161C3D;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, #CC57D2, white, #161C3D);
+  -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+  background-clip: text;
+  color: transparent; /* Rend le texte d'origine invisible */
+  text-align: center;
+  line-break: inherit;
+  margin: 110px 200px 20px;
+  font-size: 64px; /* Taille de la police, à ajuster selon vos besoins */
+  font-weight: bold; /* Gras, si désiré */
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */

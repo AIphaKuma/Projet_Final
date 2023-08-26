@@ -1,0 +1,44 @@
+@import "../../styles/common/colors";
+.card-container{
+  margin: 0 10px 20px 10px;
+  position: relative;
+  isolation: isolate;
+  background: #C9C9F6;
+  border-radius: 16px;
+  box-shadow: 0 0 2px rgba(145, 158, 171, 0.2), 0 12px 12px -4px rgba(145, 158, 171, 0.12) !important;
+  height: 500px;
+  width: 100%;
+  text-decoration: none;
+  color: #08262A;
+  padding: 0 0 8px 0;
+  a{
+    margin: 5px;
+  }
+}
+.top-text{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+
+.card-description{
+  margin: 10px;
+  text-align: center;
+}
+.top-container{
+  width: 100%;
+  min-height: 286px;
+  max-height: 286px;
+  border-radius: 16px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: default !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p,h1{
+    color: $white;
+  }
+
+}
