@@ -1,52 +1,64 @@
 import React, { useState } from 'react';
-import config from '../Config/config'; // Assurez-vous d'ajuster le chemin si nécessaire
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import {useUser} from "../Context/UserContext";
 
-function LoginForm(props) {
+
+const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const Navigate = useNavigate();
+    const { login } = useUser();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+        console.log('Submitting form with:', { username, password }); // Log des données
 
-        // Envoyer une requête POST au backend en utilisant l'URL depuis le fichier config
-        const response = await fetch(`${config.backendUrl}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password })
-        });
+        try {
+            const response = await axios.post('http://localhost:8080/login', {
+                username,
+                password
+            });
 
-        const data = await response.json();
+            console.log('Response from server:', response); // Log de la réponse
 
-        if (response.status === 200) {
-            props.onLoginSuccess(data);
-        } else {
-            props.onLoginFailure(data.message);
+            const jwt = response.data.token;
+
+            if (jwt) {
+                document.cookie = `token=${jwt}; path=/`;
+                console.log('JWT stored in cookie:', jwt); // Log du JWT stocké
+                login(response.data.user);
+                Navigate('/dashboard');
+            } else {
+                console.error('JWT not found in response:', response.data);
+                setError('Authentication failed. Please try again.');
+            }
+
+        } catch (err) {
+            console.error('Error during login:', err); // Log des erreurs
+
+            // Affichez une erreur détaillée si elle est fournie dans la réponse
+            if (err.response && err.response.data && err.response.data.message) {
+                setError(err.response.data.message);
+            } else {
+                setError(err.message);
+            }
         }
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Nom d'utilisateur:
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </label>
-            <br />
-            <label>
-                Mot de passe:
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </label>
-            <br />
-            <button type="submit">Se connecter</button>
+            <div>
+                <label>Username: </label>
+                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+            </div>
+            <div>
+                <label>Password: </label>
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            </div>
+            {error && <div>{error}</div>}
+            <button type="submit">Login</button>
         </form>
     );
 }
