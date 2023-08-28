@@ -1,16 +1,20 @@
 @import "../../styles/common/colors";
+
 .card-container{
   margin: 0 10px 20px 10px;
   position: relative;
   isolation: isolate;
   background: #C9C9F6;
-  border-radius: 16px;
+  border-radius: 30px;
   box-shadow: 0 0 2px rgba(145, 158, 171, 0.2), 0 12px 12px -4px rgba(145, 158, 171, 0.12) !important;
   height: 500px;
   width: 100%;
   text-decoration: none;
   color: #08262A;
   padding: 0 0 8px 0;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
   a{
     margin: 5px;
   }
@@ -18,13 +22,20 @@
 .top-text{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-
+  gap: 250Px;
 }
 
-.card-description{
+.play-button{
+  display: flex;
+  align-items: center;
   margin: 10px;
-  text-align: center;
+  a{
+    color: black;
+  }
+}
+.card-description{
+  margin: 10px 40px;
+  text-align: left;
 }
 .top-container{
   width: 100%;
@@ -41,4 +52,16 @@
     color: $white;
   }
 
+
+
+  .instrument{
+    display: flex;
+    align-items: center;
+    color: black;
+    background-color: $grey2;
+    border-radius: 16px;
+    width: 90%;
+    padding: 5px;
+    gap: 15px;
+  }
 }

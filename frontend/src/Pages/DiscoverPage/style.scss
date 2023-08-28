@@ -1,4 +1,4 @@
-
+@import "../../styles/common/colors";
 
 .container{
   margin-left: 90px;
@@ -9,11 +9,54 @@
 .container2 {
   margin-top: 40px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-left: 40px;
   margin-right: 40px;
 
+  .text-container2{
+    margin: 10px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    h2{
+      background-image: linear-gradient(to right, $primarymain, $white, $primaryblue);
+      -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+      background-clip: text;
+      color: transparent; /* Rend le texte d'origine invisible */
+      text-align: center;
+      line-break: inherit;
+      font-size: 20px; /* Taille de la police, à ajuster selon vos besoins */
+      font-weight: bold; /* Gras, si désiré */
+    }
+    h1{
+      font-size: 48px;
+      margin-right: 100px;
+      color: $white;
+    }
+  }
+
 }
+.container3{
+  margin-top: 90px;
+  padding: 90px;
+  display: flex;
+  .text-container3{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
+    h1{
+      font-size: 48px;
+      color: $white;
+    }
+    p{
+      font-size: 24px;
+      color: $white;
+    }
+  }
+
+}
+
 .cards-container{
   display: flex;
   flex-direction: row;

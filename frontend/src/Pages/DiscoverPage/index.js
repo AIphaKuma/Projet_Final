@@ -4,10 +4,12 @@ import Navbar from "../../Components/Navbar";
 
 import Images from "../../assets/image/index.js";
 
-import './style.scss'
 import Partner from "../../Components/partner";
 import Card from "../../Components/card";
 
+
+import './style.scss'
+import Footer from "../../Components/Footer";
 
 
 function Discoverpage() {
@@ -27,15 +29,29 @@ function Discoverpage() {
                 </div>
                 <Partner logo={Images.SalineLogo}></Partner>
                 <div className="container2">
-                    <div className="">
-
+                    <div className="text-container2">
+                        <h2>Nos Masterclass</h2>
+                        <h1>Découvrez le plus grand catalogue de masterclasses de musique classique</h1>
                     </div>
                     <div className="cards-container">
-                        <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={"https://imgs.search.brave.com/_nzEOD2jiGMagB5GwxxToXNmItqcwGwyl6wiBHeNbvw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/aXN0b2NrcGhvdG8u/Y29tL3Jlc291cmNl/cy9pbWFnZXMvRnJl/ZVBob3Rvcy9GcmVl/LVBob3RvLTc0MHg0/OTItMTUxNTY2NDEz/My5qcGc"}></Card>
-                        <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"}></Card>
-                        <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"}></Card>
+                        <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
+                        <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
+                        <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
                     </div>
                 </div>
+                <div className="container3">
+                    <div className="text-container3">
+                        <h1>Morem ipsum dolor sit</h1>
+                        <p>Qorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. </p>
+                        <PwButton variant={"primary"} size={"large"} title={"Connectez-vous"} link={'/login'}></PwButton>
+                    </div>
+                    <img src={Images.Violon1} alt={'violon'}></img>
+                    <div className="container3-bottom">
+                        <p>.01</p>
+
+                    </div>
+                </div>
+                <Footer></Footer>
             </div>
         </div>
     );
