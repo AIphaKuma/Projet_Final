@@ -1,0 +1,17 @@
+@import "../styles/common/colors";
+
+.dashboard-container{
+  background-color: $lightsecondary;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.dashboard-global-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-category{
+  font-size: 24px;
+  margin: 10px;
+}

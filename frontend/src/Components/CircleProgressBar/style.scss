@@ -1,0 +1,35 @@
+@import "../../styles/common/colors";
+
+.circular-progress {
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  width: auto; /* Ajuste la largeur automatiquement */
+  height: auto; /* Ajuste la hauteur automatiquement */
+}
+
+.circle-background {
+  fill: none;
+  stroke: $secondary; /* Background color of the circle */
+  stroke-width: 10; /* Width of the circle border */
+}
+
+.circle-progress {
+  fill: none;
+  stroke-width: 10; /* Largeur de la barre de progression */
+  stroke-linecap: round;
+  transform-origin: center;
+  transition: stroke-dashoffset 0.3s;
+  transform: rotate(-90deg);
+  stroke: $thirdblue; /* Color of the progress bar */
+
+}
+
+.percentage-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 24px; /* Font size of the percentage text */
+  font-weight: bold;
+  color: #333; /* Color of the percentage text */
+}
