@@ -5,18 +5,20 @@ import LoginPage from './Pages/LoginPage';
 import HomePage from './Pages/HomePage';
 import DiscoverPage from "./Pages/DiscoverPage";  // Assumons que vous avez une page d'accueil
 import DashboardPage from "./Pages/DashboardPage";
-import LoginForm from "./Pages/LoginForm";
 import {UserProvider} from "./Context/UserContext";
+import RegisterPage from "./Pages/RegisterPage";
+
 
 function App() {
   return (
       <UserProvider>
           <Router>
             <Routes>
-              <Route path="/dashboard" element={<DashboardPage />}></Route>
-              <Route path="/login" element={<LoginForm />} />
-              <Route path="/" element={<HomePage />} />
-              <Route path={"/discover"} element={<DiscoverPage/>} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path={"/register"} element={<RegisterPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path={"/discover"} element={<DiscoverPage/>} />
             </Routes>
           </Router>
       </UserProvider>
