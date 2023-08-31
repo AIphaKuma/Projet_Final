@@ -8,7 +8,8 @@ function HomePage() {
             <p>Contenu de votre page d'accueil...</p>
 
             <div>
-                <Link to="/login">Aller à la page de connexion</Link>
+                <Link to="/login">Aller à la page de connexion</Link> <br/>
+                <Link to="/register">Aller à la création de compte</Link>
             </div>
         </div>
     );

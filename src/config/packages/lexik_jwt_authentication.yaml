@@ -11,7 +11,7 @@ lexik_jwt_authentication:
     # Configuration du cookie pour stocker le JWT
     set_cookies:
         token:                                                        # nom du cookie
-            lifetime: null                                            # durée de vie du cookie en secondes (null pour une session)
+            lifetime: 3600                                            # durée de vie du cookie en secondes (null pour une session)
             samesite: 'strict'                                        # stratégie de same-site
             path: '/'                                                 # chemin du cookie
             domain: null                                              # domaine du cookie
