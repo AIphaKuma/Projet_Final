@@ -1,0 +1,27 @@
+@import "./colors";
+@import "./shadows";
+
+@mixin card {
+  margin-bottom: 20px;
+  position: relative;
+  padding: 24px;
+  isolation: isolate;
+  height: 160px;
+  background: $white;
+  border-radius: 16px;
+  @include cardShadow;
+}
+
+.os-card-border {
+  border-radius: 16px;
+  border: 1px solid $primaryblue;
+  padding: 24px;
+  figure.attachment.attachment--preview {
+    width: 160px !important;
+  }
+  a {
+    text-decoration: none;
+    color: $primaryblue;
+    border-bottom: 1px solid $primaryblue;
+  }
+}

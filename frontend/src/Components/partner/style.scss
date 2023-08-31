@@ -1,0 +1,15 @@
+@import "../../styles/common/colors";
+
+
+.partner-container{
+  background-color: $white;
+  height: 300px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.partner-text{
+  padding-top: 30px;
+}

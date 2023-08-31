@@ -1,0 +1,36 @@
+@mixin z1 {
+  box-shadow: 0 1px 2px rgba(145, 158, 171, 0.16);
+}
+
+@mixin z8 {
+  box-shadow: 08px 16px rgba(145, 158, 171, 0.16);
+}
+
+@mixin z12 {
+  box-shadow: 0 12px 24px -4px rgba(145, 158, 171, 0.16);
+}
+
+@mixin z16 {
+  box-shadow: 0 16px 32px -4px rgba(145, 158, 171, 0.16);
+}
+
+@mixin z20 {
+  box-shadow: 0 12px 24px -4px rgba(145, 158, 171, 0.16);
+}
+
+@mixin z24 {
+  box-shadow: 0 24px 48px rgba(145, 158, 171, 0.16);
+}
+
+@mixin cardShadow {
+  box-shadow: 0 0 2px rgba(145, 158, 171, 0.2), 0 12px 12px -4px rgba(145, 158, 171, 0.12) !important;
+}
+
+@mixin dialogShadow {
+  box-shadow: -40px 40px 80px -8px rgba(145, 158, 171, 0.24);
+}
+
+@mixin dropdownShadow {
+  box-shadow: 0 0 2px rgba(145, 158, 171, 0.24), -20px 20px 40px -4px rgba(145, 158, 171, 0.24);
+}
+

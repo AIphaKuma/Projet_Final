@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 40px;
+}
+.navbar .pw-button {
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+  justify-content: center;
+  text-decoration: none;
+  align-items: center;
+  border-radius: 32px;
+  gap: 8px;
+  margin: 0 20px;
+  color: white;
+}
+.navbar .pw-button-fit {
+  width: fit-content;
+}
+.navbar .pw-button-primary__large {
+  min-width: 80px;
+  background-color: #CC57D2;
+  padding: 20px;
+}
+.navbar .pw-button-primary__medium {
+  background-color: #CC57D2;
+  min-width: 20px;
+  max-height: 30px;
+}
+.navbar .pw-button-primary__small {
+  background-color: #CC57D2;
+}
+.navbar .pw-button-secondary__large {
+  background-color: #FFB2FF;
+}
+.navbar .pw-button-secondary__small {
+  background-color: #FFB2FF;
+}
+.navbar .pw-button-border__large {
+  border: 1px solid white;
+  padding: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

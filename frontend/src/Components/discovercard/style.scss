@@ -1,0 +1,21 @@
+@import "../../styles/common/colors";
+
+
+.discovercard-container{
+  background-color: $secondaryblue;
+  border-radius: 20px;
+  height: 180px;
+  width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  .discovercard-text{
+    font-size: 32px;
+    margin-right: 200px;
+    padding-left: 20px;
+  }
+  .pw-button{
+    margin-bottom: 20px;
+  }
+}

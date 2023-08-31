@@ -1,0 +1,29 @@
+@import "../../styles/common/colors";
+
+.footer {
+  border-radius: 30px;
+  margin: 0px 20px;
+  background-image: linear-gradient(to bottom, $primaryblue, $primarylightblue);
+  height: 518px;
+  img{
+    margin: 30px;
+  }
+  .category-container{
+    margin: 20px;
+    align-items: start;
+    padding-right: 900px;
+    display: flex;
+    flex-direction: column;
+    color: $white;
+  }
+  .mail-input{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    input{
+      width: 250px;
+      padding: 10px;
+    }
+  }
+
+}
