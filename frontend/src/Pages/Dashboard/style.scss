@@ -2,12 +2,23 @@
 
 .dashboard-global-container{
     display: flex;
-    justify-content: space-between;
     background-color: solid blue;
+
+    .dashboard-center{
+    background-color:red;
+    width: 20%;
+    height: 100vh;
   }
- 
-.dashboard-center{
-    background-color: $lightsecondary;
-    border-radius: 20px;
-    padding: 20px;
+
+  .dashboard-left{
+    background-color:red;
+    width: 20%;
+    height: 100vh;
+  }
+
+  .dashboard-right{
+    background-color:red;
+    width: 20%;
+    height: 100vh;
+  } 
 }
