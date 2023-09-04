@@ -1,0 +1,13 @@
+@import "../../styles/common/colors";
+
+.dashboard-global-container{
+    display: flex;
+    justify-content: space-between;
+    background-color: solid blue;
+  }
+ 
+.dashboard-center{
+    background-color: $lightsecondary;
+    border-radius: 20px;
+    padding: 20px;
+}
