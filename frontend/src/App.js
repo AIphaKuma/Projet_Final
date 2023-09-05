@@ -7,6 +7,7 @@ import DiscoverPage from "./Pages/DiscoverPage";  // Assumons que vous avez une 
 import DashboardPage from "./Pages/Dashboard/DashboardPage";
 import {UserProvider} from "./Context/UserContext";
 import RegisterPage from "./Pages/RegisterPage";
+import MasterclassPage from "./Pages/MasterclassPage";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                 <Route path={"/register"} element={<RegisterPage />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path={"/discover"} element={<DiscoverPage/>} />
+                <Route path={"/masterclass"} element={<MasterclassPage/>}/>
             </Routes>
           </Router>
       </UserProvider>
