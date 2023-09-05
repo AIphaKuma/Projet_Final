@@ -1,0 +1,53 @@
+@import "../../../styles/common/colors";
+
+.masterclass-card{
+  background-color: $lightsecondary;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  margin: 0 40px;
+  .masterclass-creator{
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: $white;
+  }
+  .masterclass-title{
+    margin-top:0;
+    font-size: 24px ;
+    font-weight: bold;
+    color: $white;
+  }
+  .masterclass-description{
+    font-size: 24px;
+    color: $white;
+  }
+  img{
+    background-color: black;
+    border-radius: 20px;
+    width: 25%;
+  };
+  .masterclass-card-text{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+.masterclass-info{
+  color: $black;
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  p{
+    margin: 0;
+  }
+}
