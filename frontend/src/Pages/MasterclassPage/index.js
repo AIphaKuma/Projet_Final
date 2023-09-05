@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import MasterclassCard from "../../Components/Masterclass/MasterclassCard";
 import axios from "axios";
+
+import PwButton from "../../Components/button";
+import MasterclassCard from "../../Components/Masterclass/MasterclassCard";
+
+import './style.scss'
+import Footer from "../../Components/Footer";
 
 function Masterclasspage() {
     const [error, setError] = useState(null);
@@ -37,9 +42,21 @@ function Masterclasspage() {
     };
 
     return (
-        <div className="masterclasses">
-            {renderMasterclasses()}
-        </div>
+        <>
+            <div className="masterclasses">
+                <div className={"category-title"}>Nos Masterclass</div>
+                <div className={"title"}>Les meilleurs masterclass</div>
+                <div className="filter">
+                    <PwButton title={"Categorie"} variant={"primary"} size={"medium"}></PwButton>
+                    <PwButton title={"instrument"} variant={"primary"} size={"medium"}></PwButton>
+                    <PwButton title={"durée"} variant={"primary"} size={"medium"}></PwButton>
+                    <PwButton title={"Niveau"} variant={"primary"} size={"medium"}></PwButton>
+                </div>
+                <div className={"masterclass-container"}> {renderMasterclasses()}</div>
+
+            </div>
+            <Footer></Footer>
+        </>
     );
 }
 
