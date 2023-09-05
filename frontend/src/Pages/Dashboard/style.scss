@@ -5,20 +5,50 @@
     background-color: solid blue;
 
     .dashboard-center{
-    background-color:red;
-    width: 20%;
+    background-color: $lightsecondary;
+    width: 60%;
+    border-radius: 20px;
+    padding: 20px;
     height: 100vh;
   }
 
-  .dashboard-left{
-    background-color:red;
+  .dashboard-left{ 
     width: 20%;
+    padding: 20px;
     height: 100vh;
   }
-
   .dashboard-right{
-    background-color:red;
     width: 20%;
+    padding: 20px;
     height: 100vh;
   } 
+}
+
+.sessioncard-box{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.accesprenium-box{
+    width: 222px;
+    font-size: 32px;
+    margin-bottom: 50px;
+    
+}
+.photoprenium{
+    width: 117px;
+    height: 42px;
+    background-color: violet;
+    border-radius: 20px;
+    margin-top: -38px;
+    margin-left: 75px;
+}
+
+.messagerie-box{
+    margin-bottom: 50px;
+}
+
+.calendrier-box{
+    margin-bottom: 50px;
 }
