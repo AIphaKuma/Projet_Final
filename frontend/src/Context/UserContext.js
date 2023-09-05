@@ -1,6 +1,6 @@
 // UserContext.js
 import { useState, createContext, useContext, useMemo } from "react";
-import axios from '../axios/axiosConfig';
+import axios from '../Axios/axiosConfig';
 
 const UserContext = createContext(null);
 
