@@ -23,11 +23,10 @@ const LoginForm = () => {
 
             console.log('Response from server:', response); // Log de la réponse
 
-            const jwt = response.data.token;
+            const user = response.data.user;
 
-            if (jwt) {
-                document.cookie = `token=${jwt}; path=/`;
-                console.log('JWT stored in cookie:', jwt); // Log du JWT stocké
+            if (user) {
+                console.log('User:', user); // Log du JWT stocké
                 login(response.data.user);
                 Navigate('/dashboard');
             } else {
