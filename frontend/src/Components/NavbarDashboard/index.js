@@ -7,6 +7,9 @@ import Images from "../../assets/image/index.js";
 import ProfilePicture from "../../Components/ProfilPicture";
 
 import { useUser } from '../../Context/UserContext';
+import Fontawesome from '../../api/Fontawesome';
+
+import './style.scss';
 
 
 
@@ -20,11 +23,12 @@ function NavbarDashboard() {
     }
     return (
         <div className="navbar">
+            <Fontawesome/>
            <img src={Images.SalineLogo} alt={"logonavbar"}/>
             <div className="btn-container">
             <ProfilePicture link={Image.SalineLogo} role={user.role} username={user.username}></ProfilePicture>
-                <PwButton size={"large"} title={"recherche"} ></PwButton>
-                <PwButton size={"large"} title={"Essaie Version Gratuite"}></PwButton>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-regular fa-bell"></i>  
             </div>
             <div className="btn-container2">
                 <PwButton size={"small"} title={"reg"}></PwButton>
