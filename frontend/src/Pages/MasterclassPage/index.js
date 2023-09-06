@@ -4,11 +4,16 @@ import axios from "axios";
 import PwButton from "../../Components/button";
 import MasterclassCard from "../../Components/Masterclass/MasterclassCard";
 
-import './style.scss'
+
 import Footer from "../../Components/Footer";
+import MasterclassLoader from "../../Components/Loaders/MasterclassLoarder";
+
+import './style.scss'
 
 function Masterclasspage() {
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const [masterclass, setMasterclasses] = useState([]); // Initialisé en tant qu'array vide
 
     const getMasterclass = async () => {
@@ -16,6 +21,9 @@ function Masterclasspage() {
             const response = await axios.get('http://localhost:8080/masterclass');
             setMasterclasses(response.data); // Utilisation de response.data pour accéder aux données
             console.log('Response from server:', response.data); // Log de la réponse
+            setTimeout(() => {
+                setLoading(false);
+            }, 5000);
         } catch (err) {
             console.error('Error during fetching masterclasses:', err); // Log des erreurs
             setMasterclasses([]);
@@ -35,10 +43,13 @@ function Masterclasspage() {
 
     const renderMasterclasses = () => {
         // Vérification de l'existence de masterclass avant le mappage
-        if (!masterclass) {
-            return null;
+        if (masterclass && loading) {
+            return masterclass.map(n => <MasterclassLoader masterclass={4} key={n.id}  />);
+
+        } else {
+            return masterclass.map(n => <MasterclassCard masterclass={n} key={n.id} title={n.name} creator={n.created_by} duration={n.duration} image={n.image} description={n.description} />);
+
         }
-        return masterclass.map(n => <MasterclassCard masterclass={n} key={n.id} title={n.name} creator={n.created_by} duration={n.duration} image={n.image} description={n.description} />);
     };
 
     return (
