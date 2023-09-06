@@ -1,0 +1,33 @@
+@import "../../styles/common/colors";
+
+.filter{
+  display: flex;
+  flex-direction: row;
+}
+
+.category-title{
+  background-image: linear-gradient(to left, #CC57D2, white, #565ADD);
+  -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+  background-clip: text;
+  color: transparent; /* Rend le texte d'origine invisible */
+  line-break: inherit;
+  font-size: 22px; /* Taille de la police, à ajuster selon vos besoins */
+  font-weight: bold; /* Gras, si désiré */
+}
+
+.title{
+  margin-left: 30px;
+  font-size: 48px;
+  color: $white;
+}
+.masterclasses{
+  background: linear-gradient(to bottom, #1D2551, #161C3D);
+  border-radius: 20px;
+  height: 900px;
+  margin: 40px;
+  padding: 50px;
+}
+
+.masterclass-container{
+  margin: 10px;
+}
