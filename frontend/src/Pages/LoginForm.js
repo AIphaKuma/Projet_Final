@@ -26,6 +26,7 @@ const LoginForm = () => {
                 lastname: mode === 'register' ? lastname : undefined  // Envoyez lastname seulement en mode 'register'
             });
 
+
             if (mode === 'login') {
                 const jwt = response.data.token;
                 if (jwt) {
@@ -35,6 +36,7 @@ const LoginForm = () => {
                 } else {
                     setError('Échec de l\'authentification. Veuillez réessayer.');
                 }
+
             } else {
                 // Gérez le succès de l'inscription ici, si nécessaire
                 Navigate('/login');
