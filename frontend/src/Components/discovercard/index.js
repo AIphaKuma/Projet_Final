@@ -10,7 +10,7 @@ function DiscoverCard({title, instrument, author, description, background}) {
     return (
 
             <div className="discovercard-container">
-                    <h1 className="discovercard-text">Torem ipsum dolor sit  ipsum </h1>
+                    <h1 className="discovercard-text">{title}</h1>
                     <PwButton title={"Découvre maintenant"} variant={"primary"} size={"large"}> </PwButton>
             </div>
 

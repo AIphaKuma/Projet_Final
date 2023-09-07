@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage';
 import HomePage from './Pages/HomePage';
 import DiscoverPage from "./Pages/DiscoverPage";  // Assumons que vous avez une page d'accueil
-import DashboardPage from "./Pages/DashboardPage";
+import DashboardPage from "./Pages/Dashboard/DashboardPage";
 import {UserProvider} from "./Context/UserContext";
 import RegisterPage from "./Pages/RegisterPage";
 import MasterclassPage from "./Pages/MasterclassPage";

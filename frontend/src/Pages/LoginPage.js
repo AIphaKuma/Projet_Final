@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
+import './style.scss';
+
+
 
 function LoginPage() {
+ 
     const [message, setMessage] = useState('');
 
     const handleLoginSuccess = (data) => {
@@ -14,13 +18,21 @@ function LoginPage() {
     }
 
     return (
-        <div>
-            <h2>Connexion</h2>
-            <LoginForm
-                onLoginSuccess={handleLoginSuccess}
-                onLoginFailure={handleLoginFailure}
-            />
-            {message && <p>{message}</p>}
+
+
+        <div className='container-connexion'>
+            <div className='container-connexion_form'>
+                <h2>Re Bonjour</h2>
+                <p>Veuillez entrer vos informations.</p>
+                <LoginForm
+                    onLoginSuccess={handleLoginSuccess}
+                    onLoginFailure={handleLoginFailure}
+                />
+                {message && <p>{message}</p>}
+            </div>
+            <div className='container-connexion_image'>
+                
+            </div>
         </div>
     );
 }
