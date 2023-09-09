@@ -24,6 +24,7 @@ const LoginForm = () => {
                 password,
             });
 
+
             if (mode === 'login') {
                 const jwt = response.data.token;
                 if (jwt) {
@@ -33,6 +34,7 @@ const LoginForm = () => {
                 } else {
                     setError('Échec de l\'authentification. Veuillez réessayer.');
                 }
+
             } else {
                 navigate('/login'); // Corrected the variable name to 'navigate'
             }

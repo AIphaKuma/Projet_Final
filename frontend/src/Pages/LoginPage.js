@@ -1,4 +1,3 @@
-// LoginPage.js
 import React, { useState } from 'react';
 import './style.scss';
 import Fontawesome from '../api/Fontawesome';
