@@ -7,3 +7,20 @@
 .profile-picture-container{
     margin-right: 300px;
 }
+
+@media (max-width:890px){
+    img{
+        width: 100px;
+    }
+}
+
+@media (max-width: 767px){
+    .profile-picture-container{
+        width: 0%;
+        visibility: hidden;
+    }
+    .btn-container{
+        width: 120px;
+        margin-right: 10px;
+    }
+}

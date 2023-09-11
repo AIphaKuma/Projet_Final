@@ -6,11 +6,13 @@ import Discovercard from "../../Components/discovercard";
 import ProfilePicture from "../../Components/ProfilPicture";
 import SessionCard from "../../Components/SessionCard";
 
+
 import NavbarDashboard from "../../Components/NavbarDashboard";
 
 import Image from "../../assets/image";
 import Fontawesome from '../../api/Fontawesome';
 import './style.scss'
+import MiniProfile from '../../Components/MiniProfil';
 
 
 
@@ -78,7 +80,7 @@ function Dashboard() {
                         <div className="dashboard-right">
                                 <div className="accesprenium-box">
                                   Torem ipsum dolor sit  ipsum dolor
-                                  <div className="photoprenium"></div>
+                                  <div className="photo-prenium"></div>
                                 </div>
                                 <div className="messagerie-box">
                                   <div className="dashboard-category">Messagerie</div>

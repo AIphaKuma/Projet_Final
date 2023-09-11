@@ -3,7 +3,7 @@ import React from 'react';
 import PwButton from "../../Components/button";
 
 import Images from "../../assets/image/index.js";
-
+import MiniProfile from "../../Components/MiniProfil";
 import ProfilePicture from "../../Components/ProfilPicture";
 
 import { useUser } from '../../Context/UserContext';
@@ -31,7 +31,7 @@ function NavbarDashboard() {
             <i class="fa-regular fa-bell"></i>  
             </div>
             <div className="btn-container2">
-                <PwButton size={"small"} title={"reg"}></PwButton>
+                <MiniProfile link={Image.SalineLogo} username={user.username}></MiniProfile>
             </div>
         </div>
     );

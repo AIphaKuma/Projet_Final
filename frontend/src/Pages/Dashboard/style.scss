@@ -2,7 +2,6 @@
 
 .dashboard-global-container{
     display: flex;
-    background-color: solid blue;
 
     .dashboard-center{
     background-color: $lightsecondary;
@@ -42,7 +41,7 @@
     margin-bottom: 52px;
     
 }
-.photoprenium{
+.photo-prenium{
     width: 117px;
     height: 42px;
     background-color: violet;
@@ -95,5 +94,105 @@
     display: flex;
     margin-top: 60px;
 }
+
+
+@media (max-width: 1150px) {
+    .sessioncard-box{
+        scroll-behavior: auto;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+    .dashboard-category{
+        font-size: 20px;
+    }
+    .profile-picture-container{
+        margin-right: 50px;
+    }
+    .accesprenium-box{
+        font-size: 20px;
+    }
+    .dashboard-global-container .dashboard-center {
+        width: 50%;
+    }
+}
+
+@media (max-width: 890px){
+    .profile-picture-container{
+        
+        margin-right: 0px;
+    }
+    
+    .dashboard-global-container 
+    .dashboard-center {
+        width: 65%;
+    }
+    .dashboard-right{
+        visibility: hidden;
+        width: 0%;
+    }
+    .dashboard-category{
+        font-size: 18px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .dashboard-category{
+        font-size: 16px;
+    
+    }
+    .dashboard-global-container 
+    .dashboard-center {
+        width: 50%;
+        margin-left: 24px;
+    }
+    .dashboard-left {
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 40px;
+    }
+
+    .dashboard-right {
+        margin-top: 20px;
+    }
+
+    .sessioncard-box {
+        align-items: center;
+        gap: 10px;
+    }
+
+    .accesprenium-box {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .photo-prenium {
+        width: 80px;
+        height: 28px;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .icon-nav6 {
+        margin-top: 20px;
+    }
+}
+// @media (max-width: 767px) {
+//     .dashboard-center {
+//         width: 100%;
+//     }
+
+//     .dashboard-left {
+//         width: 100%;
+//         margin: 0;
+//     }
+
+//     .dashboard-right {
+//         width: 100%;
+//         height: auto;
+//         margin-top: 20px;
+//     }
+// }
 
 

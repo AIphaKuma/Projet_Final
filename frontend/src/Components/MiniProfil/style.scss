@@ -1,0 +1,71 @@
+@import "../../styles/common/colors";
+
+.mini-profile-picture-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: $lightgrey;
+  border-radius: 20px;
+  padding: 0 15px 0 4px;
+  height: 38px;
+
+}
+
+.mini-circle {
+  width: 18px; /* Largeur du cercle */
+  height: 18px; /* Hauteur du cercle */
+  border: 2px solid $third; /* Bordure de 5px */
+  border-radius: 50%; /* Crée un cercle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px; /* Espace de 5px à l'intérieur du cercle */
+  background-image: radial-gradient(circle, transparent 1%, #fff 1%, #fff); /* Crée un espace à l'intérieur */
+  background-size: 100% 100%;
+  background-position: center center;
+  position: relative;
+}
+
+.mini-circle-image {
+  width: 100%; /* Ajuste la taille de l'image pour remplir le cercle */
+  height: 100%; /* Ajuste la taille de l'image pour remplir le cercle */
+  object-fit: cover; /* Redimensionne l'image pour qu'elle remplisse le conteneur */
+  border-radius: 50%; /* Assure que l'image à l'intérieur est également un cercle */
+  position: absolute; /* Positionne l'image par rapport au cercle parent */
+  top: 0;
+  left: 0;
+}
+
+.mini-notifications {
+  width: 6px; /* Largeur du cercle avec le chiffre */
+  height: 6px; /* Hauteur du cercle avec le chiffre */
+  background-color: $third; /* Couleur du cercle avec le chiffre */
+  border-radius: 50%; /* Crée un cercle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute; /* Positionne le cercle avec le chiffre par rapport au cercle parent */
+  top: -4px;
+  right: -4px;
+  z-index: 1;
+}
+
+.mini-number {
+  font-size: 16px; /* Taille de la police du chiffre */
+  color: $white; /* Couleur du chiffre */
+  font-weight: bold; /* Éventuellement, mettez le chiffre en gras */
+}
+
+.mini-profile-picture-text{
+  display: flex;
+  padding: 0 0 0 15px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  .mini-profile-picture-username{
+    font-size: 18px;
+    color: $black;
+    margin-bottom: 0;
+    align-items: center;
+  }
+}
