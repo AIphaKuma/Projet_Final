@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 countries.registerLocale(countriesLang);
 
-const RegisterForm = () => {
+const RegisterPage = () => {
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',

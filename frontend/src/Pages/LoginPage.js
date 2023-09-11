@@ -3,7 +3,7 @@ import './style.scss';
 import Fontawesome from '../api/Fontawesome';
 import Images from '../assets/image/index';
 // import CombinedForms from './CombinedForms';
-import LoginForm from './LoginForm';
+import LoginForm from '../form/LoginForm/LoginForm';
 
 
 function LoginPage() {

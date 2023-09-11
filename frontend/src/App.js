@@ -1,7 +1,7 @@
 // App.js (ou Routes.js)
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './Pages/LoginPage';
+import LoginForm from "./form/LoginForm/LoginForm";
 import HomePage from './Pages/HomePage';
 import DiscoverPage from "./Pages/DiscoverPage";  // Assumons que vous avez une page d'accueil
 import DashboardPage from "./Pages/Dashboard/DashboardPage";

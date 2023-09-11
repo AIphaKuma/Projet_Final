@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import countries from "i18n-iso-countries";
 import countriesLang from "i18n-iso-countries/langs/fr.json";
-import { useUser } from "../Context/UserContext";
+import { useUser } from "../../Context/UserContext";
 import { useNavigate } from 'react-router-dom';
-import Fontawesome from '../api/Fontawesome';
-import './style.scss';
+import Fontawesome from '../../api/Fontawesome';
+import '../../Pages/style.scss';
 
 countries.registerLocale(countriesLang);
 

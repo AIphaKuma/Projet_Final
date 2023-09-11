@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useUser } from "../Context/UserContext";
-import './style.scss';
-import Fontawesome from '../api/Fontawesome';
-import RegisterForm from './RegisterForm'; // Import RegisterForm component
+import { useUser } from "../../Context/UserContext";
+import '../../Pages/style.scss';
+import Fontawesome from '../../api/Fontawesome';
+import RegisterForm from '../RegisterForm/RegisterForm'; // Import RegisterForm component
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');

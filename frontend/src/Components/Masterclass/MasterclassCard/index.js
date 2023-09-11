@@ -2,7 +2,7 @@ import React from 'react';
 import Image from '../../../assets/image/index'
 import './style.scss'
 
-function Masterclass({image,title,duration, creator, description, lvl}) {
+function MasterclassCard({image,title,duration, creator, description, lvl}) {
     return (
         <div className="masterclass-card">
             <img src={image} alt={"masterclassimage"}/>
@@ -25,4 +25,4 @@ function Masterclass({image,title,duration, creator, description, lvl}) {
     );
 }
 
-export default Masterclass;
+export default MasterclassCard;
