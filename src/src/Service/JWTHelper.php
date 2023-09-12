@@ -21,7 +21,7 @@ class JWTHelper {
         'aud' => $this -> frontendUrl,  // auditoire
         'iat' => time(),                  // quand le JWT a été émis
         'nbf' => time(),                  // avant ce moment, le JWT ne sera pas accepté
-        'exp' => time() + 10800,           // expire après 1 heure
+        'exp' => time() + 86400,           // expire après 1 heure
         'data' => [                       // les données que vous souhaitez inclure dans le JWT
             'id' => $users->getId(),
             'username' => $users->getUsername(),

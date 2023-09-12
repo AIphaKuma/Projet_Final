@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -46,8 +48,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\Column]
-    private ?int $role = null;
+    #[ORM\ManyToOne(targetEntity: Role::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Role $role = null;
+
+    #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Masterclass::class)]
+    private Collection $masterclasses;
+
+    public function __construct()
+    {
+        $this->masterclasses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -210,14 +221,44 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getUsername();
     }
 
-    public function getRole(): ?int
+    public function getRole(): ?Role
     {
         return $this->role;
     }
 
-    public function setRole(int $role): static
+    public function setRole(?Role $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Masterclass>
+     */
+    public function getMasterclasses(): Collection
+    {
+        return $this->masterclasses;
+    }
+
+    public function addMasterclass(Masterclass $masterclass): static
+    {
+        if (!$this->masterclasses->contains($masterclass)) {
+            $this->masterclasses->add($masterclass);
+            $masterclass->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMasterclass(Masterclass $masterclass): static
+    {
+        if ($this->masterclasses->removeElement($masterclass)) {
+            // set the owning side to null (unless already changed)
+            if ($masterclass->getCreatedBy() === $this) {
+                $masterclass->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }

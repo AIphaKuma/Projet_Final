@@ -24,5 +24,7 @@ services:
             $key: '%env(JWT_SECRET_KEY)%'
             $backendUrl: '%env(BACKEND_URL)%'
             $frontendUrl: '%env(FRONTEND_URL)%'
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Security\JWTAuthenticator:
+        arguments:
+            $secretKey: '%env(JWT_SECRET_KEY)%'
+

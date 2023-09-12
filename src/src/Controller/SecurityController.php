@@ -50,17 +50,16 @@ class SecurityController extends AbstractController
             new Cookie(
                 "token",       // Nom du cookie
                 $token,        // Valeur du cookie
-                new \DateTime('+3 hour'), // Date d'expiration
+                new \DateTime('+1 day'), // Date d'expiration
                 "/",           // Chemin
-                null,          // Domaine
+                'localhost',   // Domaine
                 false,         // Sécurisé (utilisez true si vous êtes en HTTPS)
                 true,          // httpOnly
                 false,
-                "lax",// SameSite none (peut être "strict", "lax" ou "none")
+                Cookie::SAMESITE_LAX,
             )
         );
         $createdCookieValue = $response->headers->getCookies()[0]->getValue();
-
 
         $response->setContent(json_encode([
             'message' => 'Connexion réussie',
@@ -74,7 +73,6 @@ class SecurityController extends AbstractController
 
         return $response;
     }
-
 
     #[Route('/register', name:'register')]
     public function register(Request $request,
