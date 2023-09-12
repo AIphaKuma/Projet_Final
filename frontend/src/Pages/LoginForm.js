@@ -19,9 +19,10 @@ const LoginForm = () => {
             const response = await axios.post('http://localhost:8080/login', {
                 username,
                 password
-            });
+        });
 
-            console.log('Response from server:', response); // Log de la réponse
+
+            console.log('Response from server:', response);
 
             const user = response.data.user;
 
