@@ -45,7 +45,7 @@ function Masterclasspage() {
                                                      level={n.level}
                                                      duration={n.duration}
                                                      image={n.image}
-                                                     description={n.description} />);
+                                                     comment={n.comment} />);
     };
 
     return (
