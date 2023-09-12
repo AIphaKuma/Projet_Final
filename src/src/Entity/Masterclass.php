@@ -91,6 +91,7 @@ class Masterclass
         return $this->created_by;
     }
 
+
     public function setCreatedBy(?Users $created_by): static
     {
         $this->created_by = $created_by;

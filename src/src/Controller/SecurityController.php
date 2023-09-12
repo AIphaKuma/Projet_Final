@@ -76,7 +76,7 @@ class SecurityController extends AbstractController
 
     #[Route('/register', name:'register')]
     public function register(Request $request,
-                             EntityManagerInterface $entityManager): Response
+                            EntityManagerInterface $entityManager): Response
     {
         $data = json_decode($request->getContent(), true);
         $username = $data['username'] ?? '';
@@ -110,7 +110,7 @@ class SecurityController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
-        $token = $this->jwtHelper->createToken($user);
+        $token = $this->jwtManager->create($user);
 
         return $this->json([
             'message' => 'User successfully registered',

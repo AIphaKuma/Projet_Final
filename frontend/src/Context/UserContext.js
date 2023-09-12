@@ -1,6 +1,6 @@
 // UserContext.js
 import { useState, createContext, useContext, useMemo } from "react";
-import axios from '../axios/axiosConfig';
+import axios from '../Axios/axiosConfig';
 
 const UserContext = createContext(null);
 
@@ -15,6 +15,10 @@ export function UserProvider({ children }) {
         setUser(userData);
     };
 
+    const register = (userData) => {
+        setUser(userData);
+    };
+
     const logout = async () => {
         try {
             await axios.post('logout');
@@ -24,7 +28,7 @@ export function UserProvider({ children }) {
         }
     };
 
-    const contextValue = useMemo(() => ({ user, login, logout }), [user]);
+    const contextValue = useMemo(() => ({ user, login, register, logout }), [user]);
 
     return (
         <UserContext.Provider value={contextValue}>

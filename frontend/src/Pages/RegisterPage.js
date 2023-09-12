@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import countries from "i18n-iso-countries";
@@ -7,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 countries.registerLocale(countriesLang);
 
-const RegisterForm = () => {
+const RegisterPage = () => {
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -85,4 +86,5 @@ const RegisterForm = () => {
     );
 };
 
-export default RegisterForm;
+export default RegisterPage;
+
