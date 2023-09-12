@@ -38,7 +38,14 @@ function Masterclasspage() {
         if (!masterclass) {
             return null;
         }
-        return masterclass.map(n => <MasterclassCard masterclass={n} key={n.id} title={n.name} creator={n.created_by} duration={n.duration} image={n.image} description={n.description} />);
+        return masterclass.map(n => <MasterclassCard masterclass={n}
+                                                     key={n.id}
+                                                     title={n.name}
+                                                     creator={n.created_by}
+                                                     level={n.level}
+                                                     duration={n.duration}
+                                                     image={n.image}
+                                                     description={n.description} />);
     };
 
     return (

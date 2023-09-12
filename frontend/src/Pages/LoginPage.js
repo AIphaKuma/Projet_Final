@@ -46,7 +46,7 @@ function LoginPage() {
                             </div>
                             <div className='icon'>
                                 
-                                <div className='fleche_gauche'><i class="fa-solid fa-arrow-right"></i></div>
+                                <div className='fleche_gauche'><i className="fa-solid fa-arrow-right"></i></div>
                                 <div className='fleche_droite'><i className="fa-regular fa-envelope icon-arrow"></i> </div>
                             </div>
                         </div>
