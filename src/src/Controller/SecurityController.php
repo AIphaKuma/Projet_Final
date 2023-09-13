@@ -60,6 +60,8 @@ class SecurityController extends AbstractController
             )
         );
         $createdCookieValue = $response->headers->getCookies()[0]->getValue();
+        $roleName = $user->getRole()->getName();
+
 
         $response->setContent(json_encode([
             'message' => 'Connexion réussie',
@@ -67,7 +69,7 @@ class SecurityController extends AbstractController
             'cookie_value' => $createdCookieValue,
             'user' => [
                 'username' => $user->getUsername(),
-                'role' => $user->getRole(),
+                'role' => $roleName,
             ]
         ]));
 
@@ -111,6 +113,7 @@ class SecurityController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
         $token = $this->jwtManager->create($user);
+        $role = $user->getRole();
 
         return $this->json([
             'message' => 'User successfully registered',

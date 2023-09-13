@@ -50,7 +50,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(targetEntity: Role::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Role $role = null;
+    private ?Role $role= null;
 
     #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Masterclass::class)]
     private Collection $masterclasses;

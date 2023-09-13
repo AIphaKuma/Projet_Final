@@ -8,6 +8,7 @@ import DashboardPage from "./Pages/Dashboard/DashboardPage";
 import {UserProvider} from "./Context/UserContext";
 import RegisterPage from "./Pages/RegisterPage";
 import MasterclassPage from "./Pages/MasterclassPage";
+import AddMasterclassForm from "./Pages/AddMasterclassPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path={"/register"} element={<RegisterPage />} />
               <Route path="/" element={<HomePage />} />
               <Route path={"/discover"} element={<DiscoverPage/>} />
+              <Route path={"/add-masterclass"} element={<AddMasterclassForm/>}/>
               <Route path={"/masterclass"} element={<MasterclassPage/>}/>
             </Routes>
           </Router>

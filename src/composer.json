@@ -13,6 +13,7 @@
         "firebase/php-jwt": "^6.8",
         "lexik/jwt-authentication-bundle": "^2.19",
         "nelmio/cors-bundle": "*",
+        "sensio/framework-extra-bundle": "*",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2",
