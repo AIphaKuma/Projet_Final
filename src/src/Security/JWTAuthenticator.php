@@ -19,32 +19,43 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
 
 class JWTAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
-    private string $secretKey;
+    private $secretKey;
     private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(string $secretKey, UrlGeneratorInterface $urlGenerator)
+    public function __construct($secretKey, UrlGeneratorInterface $urlGenerator)
     {
         $this->secretKey = $secretKey;
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function supports(Request $request): ?bool
+    public function supports(Request $request): bool
     {
-        return !empty(getallheaders()['Authorization']);
+        $hasHeader = $request->cookies->has('token');
+        error_log('Authorization Header Present: ' . ($hasHeader ? 'Yes' : 'No'));
+        return $hasHeader;
     }
+
 
     public function authenticate(Request $request): Passport
     {
-        $token = str_replace('Bearer ', '', getallheaders()['Authorization']);
-
+        $token = $request->cookies->get('token');
+        if ($token) {
+            $tokenValue = $request->cookies->get('token');
+            error_log('Token_authenticate Value: ' . $tokenValue);
+        }
         try {
+            error_log('Token Value: ' . print_r($token, true));
             $jwt = JWT::decode($token, new Key($this->secretKey, 'HS256'));
+            error_log('JWT Decoded: ' . print_r($jwt, true));
 
-            return new SelfValidatingPassport(
-                new UserBadge($jwt->username)
-            );
+            if (!isset($jwt->data->username)) {
+                throw new CustomUserMessageAuthenticationException('JWT ne contient pas de propriété username');
+            }
+
+            return new SelfValidatingPassport(new UserBadge($jwt->data->username));
 
         } catch (\Exception $exception) {
+            error_log('Error during authentication: ' . $exception->getMessage());
             throw new CustomUserMessageAuthenticationException('JWT invalide');
         }
     }

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MasterclassController extends AbstractController
 {
@@ -47,10 +48,10 @@ class MasterclassController extends AbstractController
     }
 
     #[Route('/add-masterclass', name: 'add_masterclass')]
-    //#[IsGranted('Admin')]
     public function addMasterclass(Request $request, EntityManagerInterface $em): Response
     {
         $data = json_decode($request->getContent(), true);
+        $user = $this->getUser();
 
         // Vérifiez que les données nécessaires sont présentes
         if (!isset($data['name']) || !isset($data['category_id']) || !isset($data['level'])) {
@@ -60,6 +61,10 @@ class MasterclassController extends AbstractController
         $category = $em->getRepository(CategoryMasterclass::class)->find($data['category_id']);
         if (!$category) {
             return $this->json(['message' => 'Category not found'], 404);
+        }
+
+        if (!$user instanceof UserInterface) {
+            return $this->json(['message' => 'No user connected.'], Response::HTTP_FORBIDDEN);
         }
 
         $masterclass = new Masterclass();
