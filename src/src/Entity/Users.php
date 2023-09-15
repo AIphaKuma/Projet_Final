@@ -55,9 +55,13 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Masterclass::class)]
     private Collection $masterclasses;
 
+    #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Lessons::class)]
+    private Collection $lessons;
+
     public function __construct()
     {
         $this->masterclasses = new ArrayCollection();
+        $this->lessons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -257,6 +261,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($masterclass->getCreatedBy() === $this) {
                 $masterclass->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lessons>
+     */
+    public function getLessons(): Collection
+    {
+        return $this->lessons;
+    }
+
+    public function addLesson(Lessons $lesson): static
+    {
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons->add($lesson);
+            $lesson->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesson(Lessons $lesson): static
+    {
+        if ($this->lessons->removeElement($lesson)) {
+            // set the owning side to null (unless already changed)
+            if ($lesson->getCreatedBy() === $this) {
+                $lesson->setCreatedBy(null);
             }
         }
 
