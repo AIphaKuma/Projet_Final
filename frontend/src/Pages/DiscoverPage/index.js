@@ -10,6 +10,8 @@ import Card from "../../Components/card";
 
 import './style.scss'
 import Footer from "../../Components/Footer";
+import AvantageCard from '../../Components/AvantageCard';
+import SubscriptionCard from '../../Components/SubscriptionCard';
 
 
 function Discoverpage() {
@@ -46,9 +48,57 @@ function Discoverpage() {
                         <PwButton variant={"primary"} size={"large"} title={"Connectez-vous"} link={'/login'}></PwButton>
                     </div>
                     <img src={Images.Violon1} alt={'violon'}></img>
-                    <div className="container3-bottom">
-                        <p>.01</p>
+                </div>
+                <div className="container3-puces">
+                    <div className="puce">
+                        <div className='line'></div>
+                        <p className='number-puce'>01.</p>
+                        <p className='title-puce'>Des masterclass</p>
+                        <p className='content-puce'>De nouvelles vidéos disponibles chaque mois</p>
+                    </div>
+                    <div className="puce">
+                        <div className='line'></div>
+                        <p className='number-puce'>02.</p>
+                        <p className='title-puce'>Des masterclass</p>
+                        <p className='content-puce'>De nouvelles vidéos disponibles chaque mois</p>
+                    </div>
+                    <div className="puce">
+                        <div className='line'></div>
+                        <p className='number-puce'>03.</p>
+                        <p className='title-puce'>Des masterclass</p>
+                        <p className='content-puce'>De nouvelles vidéos disponibles chaque mois</p>
+                    </div>
+                    <div className="puce">
+                        <div className='line'></div>
+                        <p className='number-puce'>04.</p>
+                        <p className='title-puce'>Des masterclass</p>
+                        <p className='content-puce'>De nouvelles vidéos disponibles chaque mois</p>
+                    </div>
+                </div>
 
+                <div className='container4'>
+                    <div className="text-container4">
+                        <h2>Nos Masterclass</h2>
+                        <h3>Découvrez le plus grand catalogue de masterclasses de musique classique</h3>
+                    </div>
+                    <div className="content-container4">
+                        <AvantageCard title={"Titre"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1} width={'50%'}></AvantageCard>
+                        <AvantageCard title={"Titre"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1} width={'45%'}></AvantageCard>
+                        <AvantageCard title={"Titre"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1} width={'45%'}></AvantageCard>
+                        <AvantageCard title={"Titre"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1} width={'50%'}></AvantageCard>
+
+                    </div>
+                </div>
+
+                <div className='container5'>
+                    <div className="text-container5">
+                        <h2>Nos Masterclass</h2>
+                        <h3>Découvrez le plus grand catalogue de masterclasses de musique classique</h3>
+                    </div>
+                    <div className='content-container5'>
+                        <SubscriptionCard size={"small"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"} advantage6={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
+                        <SubscriptionCard size={"large"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"} advantage6={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
+                        <SubscriptionCard size={"small"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"} advantage6={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
                     </div>
                 </div>
                 <Footer></Footer>

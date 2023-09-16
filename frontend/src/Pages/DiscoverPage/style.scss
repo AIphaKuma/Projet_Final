@@ -54,6 +54,26 @@
       color: $white;
     }
   }
+  &-puces{
+    display: flex;
+    padding: 0 90px;
+    gap: 10px;
+    .puce{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      .line{
+        width: 100%;
+        height: 6px;
+        background-color: #fff;
+      }
+      p{
+        color: #fff;
+        margin-top: 5px;
+        margin-bottom: 0;
+      }
+    }
+  }
 
 }
 
@@ -69,5 +89,91 @@
   h2 {
     text-align: left;
     margin: 40px 0 40px;
+  }
+}
+
+.container4{
+  padding: 90px;
+  .text-container4{
+    text-align: center;
+    h2{
+      background-image: linear-gradient(to right, $primarymain, $white, $primaryblue);
+      -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+      background-clip: text;
+      color: transparent; /* Rend le texte d'origine invisible */
+      text-align: center;
+      line-break: inherit;
+      font-size: 20px; /* Taille de la police, à ajuster selon vos besoins */
+      font-weight: bold; /* Gras, si désiré */
+      width: 165px;
+      margin: auto;
+    }
+    h3{
+      font-size: 48px;
+      margin-right: 100px;
+      color: $white;
+    }
+  }
+  .content-container4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    .content{
+      background-color: #C9C9F6;
+      border-radius: 32px;
+    }
+    .content1{
+      width: 50%;
+    }
+    .content2{
+      width: 45%;
+    }
+    .content3{
+      width: 45%;
+    }
+    .content4{
+      width: 50%;
+    }
+    .content-image{
+      width: 100%;
+      height: 350px;
+      background-color: #686868;
+      border-radius: 32px;
+    }
+    .content-text{
+      width: 100%;
+      height: 170px;
+    }
+  }
+}
+
+.container5{
+  padding: 90px;
+  .text-container5{
+    text-align: center;
+    h2{
+      background-image: linear-gradient(to right, $primarymain, $white, $primaryblue);
+      -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+      background-clip: text;
+      color: transparent; /* Rend le texte d'origine invisible */
+      text-align: center;
+      line-break: inherit;
+      font-size: 20px; /* Taille de la police, à ajuster selon vos besoins */
+      font-weight: bold; /* Gras, si désiré */
+      width: 165px;
+      margin: auto;
+    }
+    h3{
+      font-size: 48px;
+      margin-right: 100px;
+      color: $white;
+    }
+  }
+  .content-container5{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
   }
 }
