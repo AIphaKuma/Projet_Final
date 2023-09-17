@@ -16,24 +16,12 @@ function SubscriptionCard({title, price, size, advantage1, advantage2, advantage
                 </div>
                 <div className='bottom-card'>
                     <ul>
-                        <li>
-                            <p>{advantage1}</p>
-                        </li>
-                        <li>
-                            <p>{advantage2}</p>
-                        </li>
-                        <li>
-                            <p>{advantage3}</p>
-                        </li>
-                        <li>
-                            <p>{advantage4}</p>
-                        </li>
-                        <li>
-                            <p>{advantage5}</p>
-                        </li>
-                        <li>
-                            <p>{advantage6}</p>
-                        </li>
+                    {advantage1 && <li><p>{advantage1}</p></li>}
+                    {advantage2 && <li><p>{advantage2}</p></li>}
+                    {advantage3 && <li><p>{advantage3}</p></li>}
+                    {advantage4 && <li><p>{advantage4}</p></li>}
+                    {advantage5 && <li><p>{advantage5}</p></li>}
+                    {advantage6 && <li><p>{advantage6}</p></li>}
                     </ul>
                 </div>
             </div>

@@ -96,9 +96,15 @@ function Discoverpage() {
                         <h3>Découvrez le plus grand catalogue de masterclasses de musique classique</h3>
                     </div>
                     <div className='content-container5'>
-                        <SubscriptionCard size={"small"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"} advantage6={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
+                        <SubscriptionCard size={"small"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
                         <SubscriptionCard size={"large"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"} advantage6={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
-                        <SubscriptionCard size={"small"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"} advantage6={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
+                        <SubscriptionCard size={"small"} title={"Version Pro"} price={"9.90€/Mois"} description={""} advantage1={"Acces ilimité à toutes nos masterclass"} advantage2={"Acces ilimité à toutes nos masterclass"} advantage3={"Acces ilimité à toutes nos masterclass"} advantage4={"Acces ilimité à toutes nos masterclass"} advantage5={"Acces ilimité à toutes nos masterclass"}></SubscriptionCard>
+                    </div>
+                </div>
+                <div className='container6'>
+                <div className="text-container6">
+                        <h2>Nos Masterclass</h2>
+                        <h3>Découvrez le plus grand catalogue de masterclasses de musique classique</h3>
                     </div>
                 </div>
                 <Footer></Footer>

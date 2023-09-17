@@ -177,3 +177,27 @@
     justify-content: center;
   }
 }
+
+.container6{
+  padding: 90px;
+  .text-container6{
+    text-align: center;
+    h2{
+      background-image: linear-gradient(to right, $primarymain, $white, $primaryblue);
+      -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+      background-clip: text;
+      color: transparent; /* Rend le texte d'origine invisible */
+      text-align: center;
+      line-break: inherit;
+      font-size: 20px; /* Taille de la police, à ajuster selon vos besoins */
+      font-weight: bold; /* Gras, si désiré */
+      width: 165px;
+      margin: auto;
+    }
+    h3{
+      font-size: 48px;
+      margin-right: 100px;
+      color: $white;
+    }
+  }
+}
