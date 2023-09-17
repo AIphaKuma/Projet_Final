@@ -52,7 +52,7 @@ class JWTAuthenticator extends AbstractAuthenticator implements AuthenticationEn
                 throw new CustomUserMessageAuthenticationException('JWT ne contient pas de propriété username');
             }
 
-            return new SelfValidatingPassport(new UserBadge($jwt->data->dsfusername));
+            return new SelfValidatingPassport(new UserBadge($jwt->data->username));
 
         } catch (\Exception $exception) {
             error_log('Error during authentication: ' . $exception->getMessage());

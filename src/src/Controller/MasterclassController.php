@@ -18,12 +18,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class MasterclassController extends AbstractController
 {
     private $masterclassRepository;
-    private $categorymasterclass;
 
-    public function __construct(MasterclassRepository $masterclassRepository, CategoryMasterclassRepository $categoryMasterclassRepository)
+
+    public function __construct(MasterclassRepository $masterclassRepository)
     {
         $this->masterclassRepository = $masterclassRepository;
-        $this->categorymasterclass = $categoryMasterclassRepository;
     }
 
     #[Route('/masterclass/{id}', name: 'get_masterclass')]
@@ -32,8 +31,9 @@ class MasterclassController extends AbstractController
         $masterclass = $this->masterclassRepository->find($id);
 
         if (!$masterclass) {
-            return $this->json(['message' => 'Masterclass not found'], 404);
+            return $this->json(['message' => 'Masterclass non trouvé'], 404);
         }
+
         return $this->json($this->transformMasterclass($masterclass));
     }
 
@@ -55,16 +55,16 @@ class MasterclassController extends AbstractController
 
         // Vérifiez que les données nécessaires sont présentes
         if (!isset($data['name']) || !isset($data['category_id']) || !isset($data['level'])) {
-            return $this->json(['message' => 'Invalid data'], 400);
+            return $this->json(['message' => 'Certaines data sont manquantes'], 400);
         }
 
         $category = $em->getRepository(CategoryMasterclass::class)->find($data['category_id']);
         if (!$category) {
-            return $this->json(['message' => 'Category not found'], 404);
+            return $this->json(['message' => 'Category non trouvé'], 404);
         }
 
         if (!$user instanceof UserInterface) {
-            return $this->json(['message' => 'No user connected.'], Response::HTTP_FORBIDDEN);
+            return $this->json(['message' => 'Aucun utilisateur connecté.'], Response::HTTP_FORBIDDEN);
         }
 
         $masterclass = new Masterclass();
@@ -78,7 +78,7 @@ class MasterclassController extends AbstractController
         $em->persist($masterclass);
         $em->flush();
 
-        return $this->json(['message' => 'Masterclass added successfully', 'id' => $masterclass->getId()]);
+        return $this->json(['message' => 'Masterclass ajouté', 'id' => $masterclass->getId()]);
     }
 
     #[Route('/category_masterclasses', name: 'get_all_categories', methods: ['GET'])]
@@ -105,7 +105,7 @@ class MasterclassController extends AbstractController
             'level' => $masterclass->getLevel(),
             'comment' => $masterclass->getComment(),
             'created_at' => $masterclass->getCreatedAt() ? $masterclass->getCreatedAt()->format('Y-m-d H:i:s') : null,
-            'created_by' => $masterclass->getCreatedBy() ? $masterclass->getCreatedBy()->getUsername() : null // assuming the created_by is a User entity with a getUsername method. Check for null in case it's not set.
+            'created_by' => $masterclass->getCreatedBy() ? $masterclass->getCreatedBy()->getUsername() : null
         ];
     }
 }

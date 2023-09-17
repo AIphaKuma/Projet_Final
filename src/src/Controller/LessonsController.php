@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Lessons;
+use App\Entity\Masterclass;
+use App\Entity\MusicSheet;
 use App\Entity\Videos;
 use App\Repository\LessonsRepository;
 use App\Repository\VideosRepository;
@@ -17,66 +19,103 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class LessonsController extends AbstractController
 {
-    private $lessonRepository;
-    private $videoRepository;
+    private $lessonsRepository;
+    private $videosRepository;
 
-    public function __construct(LessonsRepository $lessonRepository, VideosRepository $videoRepository)
+    public function __construct(LessonsRepository $lessonsRepository, VideosRepository $videosRepository)
     {
-        $this->lessonRepository = $lessonRepository;
-        $this->videoRepository = $videoRepository;
+        $this->lessonsRepository = $lessonsRepository;
+        $this->videosRepository = $videosRepository;
     }
 
-    #[Route('/lesson/{id}', name: 'get_lesson')]
-    public function getLesson(int $id): Response
+    #[Route('/get-lessons/{masterclassId}', name: 'get_lessons_by_masterclass')]
+    public function getLessonsByMasterclass($masterclassId, EntityManagerInterface $em): Response
     {
-        $lesson = $this->lessonRepository->find($id);
+        $masterclass = $em->getRepository(Masterclass::class)->find($masterclassId);
 
-        if (!$lesson) {
-            return $this->json(['message' => 'Lesson not found'], 404);
+        if (!$masterclass) {
+            return $this->json(['message' => 'Masterclass non trouvée'], 404);
         }
-        return $this->json($this->transformLesson($lesson));
+
+        $lessons = $em->getRepository(Lessons::class)->findBy(
+            ['masterclass' => $masterclass],
+            ['chapter' => 'ASC'] // Tri par numéro de chapitre en ordre croissant
+        );
+
+        $lessonsArray = [];
+        foreach ($lessons as $lesson) {
+            $lessonsArray[] = [
+                'id' => $lesson->getId(),
+                'name' => $lesson->getName(),
+                'chapter' => $lesson->getChapter()
+            ];
+        }
+
+        return $this->json(['lessons' => $lessonsArray]);
     }
+
 
     #[Route('/lesson', name: 'get_all_lessons')]
     public function getAllLessons(): Response
     {
-        $lessons = $this->lessonRepository->findAll();
+        $lessons = $this->lessonsRepository->findAll();
         $results = array_map([$this, 'transformLesson'], $lessons);
 
         return $this->json($results);
     }
 
-    #[Route('/add-lesson', name: 'add_lesson')]
-    public function addLesson(Request $request, EntityManagerInterface $em): Response
+    #[Route('/add-lessons', name: 'add_lessons')]
+    public function addLessons(Request $request, EntityManagerInterface $em): Response
     {
         $data = json_decode($request->getContent(), true);
         $user = $this->getUser();
 
-        // Vérifiez que les données nécessaires sont présentes
-        if (!isset($data['name']) || !isset($data['videos'])) {
-            return $this->json(['message' => 'Invalid data'], 400);
+        if (!$data || !is_array($data)) {
+            return $this->json(['message' => 'Données invalides'], 400);
         }
 
-        $video = $em->getRepository(Videos::class)->find($data['videos']);
-        if (!$video) {
-            return $this->json(['message' => 'Video not found'], 404);
+        $createdLessonIds = [];
+
+        //Boucle sur les données envoyées
+        foreach ($data as $lessonData) {
+            if (!isset($lessonData['name']) || !isset($lessonData['videos']) || !isset($lessonData['masterclass_id'])) {
+                continue; // Ignore this lesson, or you can also return an error.
+            }
+
+            //Recuperation des entités liées à la leçon
+            $video = $em->getRepository(Videos::class)->find($lessonData['videos']);
+            $masterclass = $em->getRepository(Masterclass::class)->find($lessonData['masterclass_id']);
+            $musicSheetId = $lessonData['music_sheet_id'];
+            $musicSheet = $em->getRepository(MusicSheet::class)->find($musicSheetId);
+
+            //Recuperation du dernier chapitre de la masterclass
+            $lastLesson = $this->lessonsRepository->findOneBy(['masterclass' => $masterclass], ['Chapter' => 'DESC']);
+            $currentChapterNumber = $lastLesson ? $lastLesson->getChapter() + 1 : 1;
+
+            // Gestion d'erreur a faire
+            if (!$video || !$masterclass || !$musicSheet ) {
+                continue; // Ignore this lesson if video or masterclass isn't found.
+            }
+
+
+            //Création de la leçon
+            $lesson = new Lessons();
+            $lesson->setName($lessonData['name']);
+            $lesson->setVideos($video);
+            $lesson->setMusicSheet($musicSheet);
+            $lesson->setCreatedAt(new \DateTimeImmutable());
+            $lesson->setCreatedBy($user);
+            $lesson->setMasterclass($masterclass);
+            $lesson->setChapter($currentChapterNumber);
+
+            //Ajout de la leçon à la masterclass
+            $em->persist($lesson);
+            $createdLessonIds[] = $lesson->getId();
         }
 
-        if (!$user instanceof UserInterface) {
-            return $this->json(['message' => 'No user connected.'], Response::HTTP_FORBIDDEN);
-        }
-
-        $lesson = new Lesson();
-        $lesson->setName($data['name']);
-        $lesson->setVideo($video); // assuming video is a ManyToOne relation in Lesson entity
-        $lesson->setMusicSheet($data['music_sheet'] ?? null);
-        $lesson->setCreatedAt(new \DateTimeImmutable());
-        $lesson->setCreatedBy($this->getUser());
-
-        $em->persist($lesson);
         $em->flush();
 
-        return $this->json(['message' => 'Lesson added successfully', 'id' => $lesson->getId()]);
+        return $this->json(['message' => 'Leçons ajoutées', 'created_ids' => $createdLessonIds]);
     }
 
     private function transformLesson(Lessons $lesson): array
