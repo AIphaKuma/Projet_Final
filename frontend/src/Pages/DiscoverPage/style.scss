@@ -110,7 +110,6 @@
     }
     h3{
       font-size: 48px;
-      margin-right: 100px;
       color: $white;
     }
   }
@@ -167,7 +166,6 @@
     }
     h3{
       font-size: 48px;
-      margin-right: 100px;
       color: $white;
     }
   }
@@ -175,11 +173,14 @@
     display: flex;
     gap: 20px;
     justify-content: center;
+    align-items: center;
   }
 }
 
 .container6{
   padding: 90px;
+  height: 800px;
+  overflow: hidden;
   .text-container6{
     text-align: center;
     h2{
@@ -196,8 +197,13 @@
     }
     h3{
       font-size: 48px;
-      margin-right: 100px;
       color: $white;
     }
+  }
+  .content-container6{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  align-items: flex-start;
   }
 }

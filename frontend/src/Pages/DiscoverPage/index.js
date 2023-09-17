@@ -12,6 +12,7 @@ import './style.scss'
 import Footer from "../../Components/Footer";
 import AvantageCard from '../../Components/AvantageCard';
 import SubscriptionCard from '../../Components/SubscriptionCard';
+import TextCard from '../../Components/TextCard';
 
 
 function Discoverpage() {
@@ -102,9 +103,19 @@ function Discoverpage() {
                     </div>
                 </div>
                 <div className='container6'>
-                <div className="text-container6">
+                    <div className="text-container6">
                         <h2>Nos Masterclass</h2>
                         <h3>Découvrez le plus grand catalogue de masterclasses de musique classique</h3>
+                    </div>
+                    <div className='content-container6'>
+                        <TextCard variant={"variante1"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit.Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
+                        <TextCard variant={"variante1"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
+                        <TextCard variant={"variante1"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit.Vorem ipsum dolor sit amet, consectetur adipiscing elit.Vorem ipsum dolor sit amet, consectetur adipiscing elit.Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
+                        <TextCard variant={"variante2"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit.Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
+                        <TextCard variant={"variante2"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
+                        <TextCard variant={"variante2"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit.Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
+                        <TextCard variant={"variante1"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
+                        <TextCard variant={"variante1"} title={"Vorem ipsum "} text={"Vorem ipsum dolor sit amet, consectetur adipiscing elit."}></TextCard>
                     </div>
                 </div>
                 <Footer></Footer>
