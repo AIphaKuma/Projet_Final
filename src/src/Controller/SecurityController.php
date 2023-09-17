@@ -40,7 +40,7 @@ class SecurityController extends AbstractController
         $user = $this->userRepository->findOneBy(['username' => $username]);
 
         if (!$user || !$this->isPasswordValid($user, $password)) {
-            return $this->json(['message' => 'Invalid credentials'], 401);
+            return $this->json(['message' => 'Username ou Mot de passe incorrect'], 401);
         }
 
         // Utilisez JWTHelper pour créer le token
@@ -95,7 +95,7 @@ class SecurityController extends AbstractController
         $existingUser = $this->userRepository->findOneBy(['username' => $username]);
 
         if ($existingUser) {
-            return $this->json(['message' => 'Username already exists.'], 400);
+            return $this->json(['message' => 'Utilisateur déjà existant'], 400);
         }
 
         $user = new Users();
@@ -112,12 +112,11 @@ class SecurityController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
-        $token = $this->jwtManager->create($user);
-        $role = $user->getRole();
+
+
 
         return $this->json([
-            'message' => 'User successfully registered',
-            'token' => $token,
+            'message' => 'Création de compte Réussie',
             'user' => [
                 'username' => $user->getUsername(),
                 'role' => $user->getRole(),
@@ -125,6 +124,7 @@ class SecurityController extends AbstractController
         ], 201);
     }
 
+    // Marche pas encore à fix
     #[Route('/logout', name: 'logout')]
     public function logout(): Response
     {

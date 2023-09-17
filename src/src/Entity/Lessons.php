@@ -31,6 +31,13 @@ class Lessons
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $created_by = null;
 
+    #[ORM\ManyToOne(inversedBy: 'lessons')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Masterclass $masterclass = null;
+
+    #[ORM\Column]
+    private ?int $Chapter = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +99,30 @@ class Lessons
     public function setCreatedBy(?Users $created_by): static
     {
         $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    public function getMasterclass(): ?Masterclass
+    {
+        return $this->masterclass;
+    }
+
+    public function setMasterclass(?Masterclass $masterclass): static
+    {
+        $this->masterclass = $masterclass;
+
+        return $this;
+    }
+
+    public function getChapter(): ?int
+    {
+        return $this->Chapter;
+    }
+
+    public function setChapter(int $Chapter): static
+    {
+        $this->Chapter = $Chapter;
 
         return $this;
     }
