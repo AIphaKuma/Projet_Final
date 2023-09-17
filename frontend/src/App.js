@@ -8,6 +8,7 @@ import DashboardPage from "./Pages/Dashboard/DashboardPage";
 import {UserProvider} from "./Context/UserContext";
 import RegisterPage from "./Pages/RegisterPage";
 import MasterclassPage from "./Pages/MasterclassPage";
+import Masterclass from "./Components/Masterclass/Masterclass";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path={"/discover"} element={<DiscoverPage/>} />
               <Route path={"/masterclass"} element={<MasterclassPage/>}/>
+              <Route path={"/cours"} element={<Masterclass></Masterclass>}/>
             </Routes>
           </Router>
       </UserProvider>
