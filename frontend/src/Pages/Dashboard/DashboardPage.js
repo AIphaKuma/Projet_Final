@@ -1,5 +1,6 @@
 // Dashboard.js
-import React from 'react';
+// import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '../../Context/UserContext';
 import Discovercard from "../../Components/discovercard";
 
@@ -17,8 +18,19 @@ import MiniProfile from '../../Components/MiniProfil';
 
 
 function Dashboard() {
+    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+      
+        // Fonction pour basculer l'état du menu déroulant
+        const toggleSubMenu = () => {
+          setIsSubMenuOpen(!isSubMenuOpen);
+        };
+      
+        // Ajoutez ou supprimez la classe "sub-menu-open" en fonction de isSubMenuOpen
+        const subMenuClasses = `sub-menu ${isSubMenuOpen ? 'sub-menu-open' : ''}`;
+      
 
         return <div className="">
+            
                 <NavbarDashboard></NavbarDashboard>
                 <div className="dashboard-global-container">
 
@@ -29,32 +41,36 @@ function Dashboard() {
                                     </i>
                                     <div className="dashboard-category">Dashboard</div>
                                 </div>
-                                <div className="icon-nav2">
-                                    <Fontawesome />
-                                    <i class="fa-solid fa-arrow-trend-up">
-                                    </i>
-                                    <div className="dashboard-category">Tendance</div>
-                                </div>
+                                <div className={`icon-nav2 ${isSubMenuOpen ? 'sub-menu-open' : ''}`} onClick={toggleSubMenu}>
+                                        <div className= "box-icon2">
+                                        <i class="fa-solid fa-video"></i>
+                                        <div className="dashboard-category">Masterclass</div>
+                                        </div>
+                                    
+                                    <div className={subMenuClasses}>
+                                        <div className="sub-menu-item">Les plus vues</div>
+                                        <div className="sub-menu-item">Les mieux notées</div>
+                                        <div className="sub-menu-item">Les dernieres publiées</div>
+                                    </div>
+                                    </div>
+                                               
+                                
                                 <div className="icon-nav3">
-                                    <Fontawesome />
                                     <i class="fa-regular fa-bell">
                                     </i>
                                     <div className="dashboard-category">Notifications</div>
                                 </div>
                                 <div className="icon-nav4">
-                                    <Fontawesome />
                                     <i class="fa-regular fa-message">
                                     </i>
                                     <div className="dashboard-category">Messagerie</div>
                                 </div>
                                 <div className="icon-nav5">
-                                    <Fontawesome />
                                     <i class="fa-regular fa-calendar">
                                     </i>
                                     <div className="dashboard-category">Rendez-vous</div>
                                 </div>
                                 <div className="icon-nav6">
-                                    <Fontawesome />
                                     <i class="fa-solid fa-arrow-right-from-bracket">
                                     </i>
                                     <div className="dashboard-category">Déconnexion</div>
@@ -92,7 +108,6 @@ function Dashboard() {
                         
                 </div>
         </div>
-
 
 }
 

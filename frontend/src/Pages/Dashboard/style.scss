@@ -68,8 +68,40 @@
     align-items: center;
     justify-content: center;
     display: flex;
+    flex-direction: column;
+    cursor: pointer;
 }
+.box-icon2{
+    display: flex;
+    align-items: center;
+}
+.icon-nav2.sub-menu-open .sub-menu {
+    display: flex;
+  }
+  
+  .sub-menu {
+    display: none;
+    flex-direction: column;
+    z-index: 1;
+    width: 190px;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: -20px;
+  }
+  
+  .sub-menu-item {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center; /* Centrez le texte dans le menu déroulant */
+  }
+  
+  .sub-menu-item:last-child {
+    border-bottom: none; /* Supprimer la ligne de séparation de la dernière sous-catégorie */
+  }
 
+  
+        
 .icon-nav3{
     align-items: center;
     justify-content: center;
@@ -92,7 +124,7 @@
     align-items: center;
     justify-content: center;
     display: flex;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 
@@ -104,6 +136,9 @@
     }
     .dashboard-category{
         font-size: 20px;
+    }
+    .sub-menu-item{
+        font-size: 14px;
     }
     .profile-picture-container{
         margin-right: 50px;
@@ -141,20 +176,25 @@
         font-size: 16px;
     
     }
-    .dashboard-global-container 
-    .dashboard-center {
-        width: 50%;
-        margin-left: 24px;
-    }
-    .dashboard-left {
-        flex-direction: row;
+    .dashboard-global-container{
+     .dashboard-center {
+        width: 52%;
+        padding: 16px;
+     }
+     .dashboard-left {
+        width: 38%;
         gap: 10px;
         align-items: flex-start;
-        padding: 40px;
-    }
+     }
 
-    .dashboard-right {
-        margin-top: 20px;
+    } 
+    .sub-menu{
+        width: 128px;
+        margin-top: initial;
+        margin-bottom: initial;
+    }
+    .sub-menu-item{
+        font-size: 12px;
     }
 
     .sessioncard-box {
@@ -178,21 +218,5 @@
         margin-top: 20px;
     }
 }
-// @media (max-width: 767px) {
-//     .dashboard-center {
-//         width: 100%;
-//     }
-
-//     .dashboard-left {
-//         width: 100%;
-//         margin: 0;
-//     }
-
-//     .dashboard-right {
-//         width: 100%;
-//         height: auto;
-//         margin-top: 20px;
-//     }
-// }
 
 
