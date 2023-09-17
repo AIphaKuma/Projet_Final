@@ -14,7 +14,7 @@ const RegisterForm = () => {
         first_name: '',
         last_name: '',
         address: '',
-        country: '',
+        // country: '',
         phone_number: '',
         username: '',
         password: '',
@@ -72,23 +72,24 @@ const RegisterForm = () => {
     };
 
     return ( 
-        <div>
+        <div className='connexion_form'>
             {currentStep === 1 && (
                 <div className='formulaire'>
                     <Fontawesome />
-                    <h2>Informations personnelles</h2>
-                    <div className='group'>
-                        <input type="text" name="first_name" value={first_name} onChange={onChange} />
-                        <i className="fa-regular fa-user icon-arrow"></i>
-                        <label>Prénom</label>
-                    </div>
 
-                    <div className='group'> 
-                        <input type="text" name="last_name" value={last_name}  onChange={onChange} />   
-                        <i className="fa-regular fa-user icon-arrow"></i>
-                        <label>Nom</label>
-                    </div>
+                    <div className='nomprenom'>
+                        <div className='group'>
+                            <input type="text" name="first_name" value={first_name} onChange={onChange} />
+                            <i className="fa-regular fa-user icon-arrow"></i>
+                            <label>Prénom</label>
+                        </div>
 
+                        <div className='group'> 
+                            <input type="text" name="last_name" value={last_name}  onChange={onChange} />   
+                            <i className="fa-regular fa-user icon-arrow"></i>
+                            <label>Nom</label>
+                        </div>
+                    </div>
 
                     <div className='group'> 
                         <input type="text" name="address" value={address} onChange={onChange} /> 
@@ -98,10 +99,10 @@ const RegisterForm = () => {
 
 
 
-                    <select name="country" value={country} onChange={onChange}>
+                    {/* <select className="country" value={country} onChange={onChange} >
                         <option value="" disabled>Choisissez un pays</option>
                         {countryList}
-                    </select>
+                    </select> */}
 
                     <div className='group'> 
                         <input type="text" name="phone_number" value={phone_number} onChange={onChange} />
@@ -110,8 +111,8 @@ const RegisterForm = () => {
                     </div>
 
 
-
-
+                    
+                  
                     {/* Other personal information fields */}
                     <button onClick={nextStep} className='button-form'>
                         Étape suivante
@@ -122,7 +123,7 @@ const RegisterForm = () => {
             {currentStep === 2 && (
 
                 <div className='formulaire'>
-                    <h2>Création du compte</h2>
+                    <Fontawesome />
                     <div className='group'>
                         <input type="text" name="mail" value={mail} onChange={onChange} />
                         <i className="fa-regular fa-envelope icon-arrow"></i>
@@ -146,13 +147,15 @@ const RegisterForm = () => {
                     <i className="fa-solid fa-lock icon-arrow"></i>
                     <label>Confirme mot de passe</label>
                 </div>
-                    {/* Other account creation fields */}
-                    <button onClick={previousStep} className='button-form'>
-                        Étape précédente
-                    </button>
-                    <button onClick={registerForm} className='button-form'>
-                        S'inscrire
-                    </button>
+                     <div className='ButtonSuivantPrecedent'>
+                        {/* Other account creation fields */}
+                        <button onClick={previousStep} className='button-form'>
+                            Étape précédente
+                        </button>
+                        <button onClick={registerForm} className='button-form'>
+                            S'inscrire
+                        </button>
+                     </div>
                 </div>
             )}
         </div>

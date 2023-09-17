@@ -9,6 +9,7 @@ import {UserProvider} from "./Context/UserContext";
 import RegisterPage from "./Pages/RegisterPage";
 import MasterclassPage from "./Pages/MasterclassPage";
 import AddMasterclassForm from "./Pages/AddMasterclassPage";
+import LoginPage from './Pages/LoginPage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Router>
             <Routes>
               <Route path="/dashboard" element={<DashboardPage />}></Route>
-              <Route path="/login" element={<LoginForm />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route path={"/register"} element={<RegisterPage />} />
               <Route path="/" element={<HomePage />} />
               <Route path={"/discover"} element={<DiscoverPage/>} />
