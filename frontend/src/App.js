@@ -10,6 +10,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import MasterclassPage from "./Pages/MasterclassPage";
 import AddMasterclassForm from "./Pages/AddMasterclassPage";
 import LoginPage from './Pages/LoginPage';
+import MasterclassCard from "./Pages/CoursPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path={"/discover"} element={<DiscoverPage/>} />
               <Route path={"/add-masterclass"} element={<AddMasterclassForm/>}/>
               <Route path={"/masterclass"} element={<MasterclassPage/>}/>
+              <Route path={"/cours"} element={<MasterclassCard/>}></Route>
             </Routes>
           </Router>
       </UserProvider>
