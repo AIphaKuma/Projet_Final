@@ -32,14 +32,15 @@ class LessonsController extends AbstractController
     public function getLessonsByMasterclass($masterclassId, EntityManagerInterface $em): Response
     {
         $masterclass = $em->getRepository(Masterclass::class)->find($masterclassId);
-
+        // Gestion d'erreur
         if (!$masterclass) {
             return $this->json(['message' => 'Masterclass non trouvée'], 404);
         }
-
+         // Récupération des leçons de la masterclass
         $lessons = $em->getRepository(Lessons::class)->findBy(
             ['masterclass' => $masterclass],
-            ['chapter' => 'ASC'] // Tri par numéro de chapitre en ordre croissant
+            ['Chapter' => 'ASC'] // Tri par numéro de chapitre en ordre croissant
+            //duration a ajouter
         );
 
         $lessonsArray = [];
@@ -54,14 +55,16 @@ class LessonsController extends AbstractController
         return $this->json(['lessons' => $lessonsArray]);
     }
 
-
-    #[Route('/lesson', name: 'get_all_lessons')]
-    public function getAllLessons(): Response
+    #[Route('/lessons/{lessonId}', name: 'get_lessons_by_masterclass')]
+    public function getLessons($lessonId, EntityManagerInterface $em): Response
     {
-        $lessons = $this->lessonsRepository->findAll();
-        $results = array_map([$this, 'transformLesson'], $lessons);
+        $lesson = $em->getRepository(Lessons::class)->find($lessonId);
 
-        return $this->json($results);
+        if (!$lesson) {
+            return $this->json(['message' => 'Masterclass non trouvée'], 404);
+        }
+        return $this->json($this->transformLesson($lesson));
+
     }
 
     #[Route('/add-lessons', name: 'add_lessons')]
@@ -124,7 +127,7 @@ class LessonsController extends AbstractController
             'id' => $lesson->getId(),
             'name' => $lesson->getName(),
             'video' => $lesson->getVideos()->getLink(),
-            'music_sheet' => $lesson->getMusicSheet(),
+            'music_sheet' => $lesson->getMusicSheet()->getPath(),
             'created_at' => $lesson->getCreatedAt() ? $lesson->getCreatedAt()->format('Y-m-d H:i:s') : null,
             'created_by' => $lesson->getCreatedBy() ? $lesson->getCreatedBy()->getUsername() : null // assuming created_by is a User entity with a getUsername method. Check for null in case it's not set.
         ];
