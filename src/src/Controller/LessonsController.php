@@ -27,36 +27,34 @@ class LessonsController extends AbstractController
         $this->lessonsRepository = $lessonsRepository;
         $this->videosRepository = $videosRepository;
     }
-
-    #[Route('/get-lessons/{masterclassId}', name: 'get_lessons_by_masterclass')]
+    #[Route('/get-lessons/{masterclassId}', name: 'get_lessons_by_masterclass_id')]
     public function getLessonsByMasterclass($masterclassId, EntityManagerInterface $em): Response
-    {
-        $masterclass = $em->getRepository(Masterclass::class)->find($masterclassId);
-        // Gestion d'erreur
-        if (!$masterclass) {
-            return $this->json(['message' => 'Masterclass non trouvée'], 404);
+        {
+            $masterclass = $em->getRepository(Masterclass::class)->find($masterclassId);
+
+            if (!$masterclass) {
+                return $this->json(['message' => 'Masterclass non trouvée'], 404);
+            }
+
+            $lessons = $em->getRepository(Lessons::class)->findBy(
+                ['masterclass' => $masterclass],
+                ['Chapter' => 'ASC'] // Tri par numéro de chapitre en ordre croissant
+            );
+
+            $lessonsArray = [];
+            foreach ($lessons as $lesson) {
+                $lessonsArray[] = [
+                    'id' => $lesson->getId(),
+                    'name' => $lesson->getName(),
+                    'Chapter' => $lesson->getChapter()
+                ];
+            }
+
+            return $this->json(['lessons' => $lessonsArray]);
         }
-         // Récupération des leçons de la masterclass
-        $lessons = $em->getRepository(Lessons::class)->findBy(
-            ['masterclass' => $masterclass],
-            ['Chapter' => 'ASC'] // Tri par numéro de chapitre en ordre croissant
-            //duration a ajouter
-        );
 
-        $lessonsArray = [];
-        foreach ($lessons as $lesson) {
-            $lessonsArray[] = [
-                'id' => $lesson->getId(),
-                'name' => $lesson->getName(),
-                'chapter' => $lesson->getChapter()
-            ];
-        }
-
-        return $this->json(['lessons' => $lessonsArray]);
-    }
-
-    #[Route('/lessons/{lessonId}', name: 'get_lessons_by_masterclass')]
-    public function getLessons($lessonId, EntityManagerInterface $em): Response
+   #[Route('/lessons/{lessonId}', name: 'get_lessons_by_masterclass')]
+   public function getLessons($lessonId, EntityManagerInterface $em): Response
     {
         $lesson = $em->getRepository(Lessons::class)->find($lessonId);
 
@@ -133,3 +131,6 @@ class LessonsController extends AbstractController
         ];
     }
 }
+
+
+

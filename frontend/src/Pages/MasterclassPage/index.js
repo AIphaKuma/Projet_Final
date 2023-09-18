@@ -9,12 +9,13 @@ function MasterclassPage() {
     const [error, setError] = useState(null);
     const [masterclass, setMasterclasses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [lessons, setLessons] = useState([])
     const masterclassesPerPage = 5;
     const [activeFilter, setActiveFilter] = useState(null);
 
     const getMasterclass = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/masterclass');
+            const response = await axios.get('http://localhost:8080/masterclass/');
             setMasterclasses(response.data);
             console.log('Response from server:', response.data);
         } catch (err) {
@@ -28,13 +29,46 @@ function MasterclassPage() {
             }
         }
     };
-    const  getLessons = async () => {
 
-    }
+    const fetchLessonsForMasterclass = async (masterclassId) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/get-lessons/${masterclassId}`);
+            return response.data.lessons;
+        } catch (err) {
+            console.error(`Error fetching lessons for masterclass ${masterclassId}:`, err);
+            return [];
+        }
+    };
+
+    useEffect( () => {
+        getMasterclass()
+        },[]);
 
     useEffect(() => {
-        getMasterclass();
-    }, []);
+        const fetchLessonsForAllMasterclasses = async () => {
+            // Fetch lessons for all masterclasses
+            const lessonsPromises = masterclass.map(async (m) => {
+                const lessonsForMasterclass = await fetchLessonsForMasterclass(m.id);
+                return { masterclassId: m.id, lessons: lessonsForMasterclass };
+            });
+
+            // Wait for all the promises to resolve
+            const allLessons = await Promise.all(lessonsPromises);
+
+            // Update lessons state once for all masterclasses
+            const updatedLessons = allLessons.reduce((acc, lesson) => {
+                acc[lesson.masterclassId] = lesson.lessons;
+                return acc;
+            }, {});
+            setLessons(updatedLessons);
+        };
+
+        // Call the fetch function if masterclass changes
+        if (masterclass.length > 0) {
+            fetchLessonsForAllMasterclasses();
+        }
+    }, [masterclass]);// Récupérer les leçons chaque fois que les masterclasses changent
+
 
     const applyFilter = (filter) => {
         // Apply the filter and set the active filter
@@ -69,6 +103,7 @@ function MasterclassPage() {
                 duration={n.duration}
                 image={n.image}
                 comment={n.comment}
+                lessons={lessons[n.id]}
                 instrument={n.category}
             />
         ));
@@ -86,6 +121,7 @@ function MasterclassPage() {
             <div className="masterclasses">
                 <div className={'category-title'}>Nos Masterclass</div>
                 <div className={'title'}>Les meilleurs masterclass</div>
+
                 <div className="filter">
                     <PwButton
                         title={'Categorie'}

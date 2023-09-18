@@ -2,7 +2,7 @@ import React from 'react';
 import Image from '../../../assets/image/index'
 import './style.scss'
 
-function MasterclassCard({image,title,instrument, creator, comment, level}) {
+function MasterclassCard({image,title,instrument, creator, comment, level, lessons}) {
     return (
         <div className="masterclass-card">
             <img src={image} alt={"masterclassimage"}/>
@@ -20,6 +20,18 @@ function MasterclassCard({image,title,instrument, creator, comment, level}) {
                     </div>
                 </div>
                 <p className="masterclass-description">{comment}</p>
+                <div className="lessons">
+                    <h3>Lessons:</h3>
+                    <ul>
+                        <ul>
+                            {lessons && Object.values(lessons).map((lesson, index) => (
+                                <li key={lesson.id}>
+                                    Lesson ID: {lesson.id}, Name: {lesson.name}, Chapter: {lesson.Chapter}
+                                </li>
+                            ))}
+                        </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     );
