@@ -15,7 +15,6 @@ body {
   color: transparent; /* Rend le texte d'origine invisible */
   text-align: center;
   line-break: inherit;
-  margin: 110px 200px 20px;
   font-size: 64px; /* Taille de la police, à ajuster selon vos besoins */
   font-weight: bold; /* Gras, si désiré */
 }
