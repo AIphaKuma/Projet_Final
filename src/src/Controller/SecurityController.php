@@ -9,20 +9,24 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Service\JWTHelper;
 
 class SecurityController extends AbstractController
 {
-    private JWTTokenManagerInterface $jwtManager;
     private UserPasswordHasherInterface $passwordEncoder;
     private UsersRepository $userRepository;
+    private JWTHelper $jwtHelper;
 
-    public function __construct(JWTTokenManagerInterface $jwtManager, UserPasswordHasherInterface $passwordEncoder, UsersRepository $userRepository)
+    public function __construct(
+        UserPasswordHasherInterface $passwordEncoder,
+        UsersRepository $userRepository,
+        JWTHelper $jwtHelper )
     {
-        $this->jwtManager = $jwtManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
+        $this -> jwtHelper = $jwtHelper;
     }
 
     #[Route('/login', name: 'login')]
@@ -39,17 +43,84 @@ class SecurityController extends AbstractController
             return $this->json(['message' => 'Invalid credentials'], 401);
         }
 
-        //$this->jwtManager->create($user); // Crée le token. Lexik s'occupe du reste.
-        $token = $this->jwtManager->create($user);
-        return $this->json([
+        // Utilisez JWTHelper pour créer le token
+        $token = $this->jwtHelper->createToken($user);
+        $response = new Response();
+        $response->headers->setCookie(
+            new Cookie(
+                "token",       // Nom du cookie
+                $token,        // Valeur du cookie
+                new \DateTime('+3 hour'), // Date d'expiration
+                "/",           // Chemin
+                null,          // Domaine
+                false,         // Sécurisé (utilisez true si vous êtes en HTTPS)
+                true,          // httpOnly
+                false,
+                "lax",// SameSite none (peut être "strict", "lax" ou "none")
+            )
+        );
+        $createdCookieValue = $response->headers->getCookies()[0]->getValue();
+
+
+        $response->setContent(json_encode([
             'message' => 'Connexion réussie',
+            'token' => $token,
+            'cookie_value' => $createdCookieValue,
+            'user' => [
+                'username' => $user->getUsername(),
+                'role' => $user->getRole(),
+            ]
+        ]));
+
+        return $response;
+    }
+
+    #[Route('/register', name:'register')]
+    public function register(Request $request,
+                             EntityManagerInterface $entityManager): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $username = $data['username'] ?? '';
+        $password = $data['password'] ?? '';
+        $firstName = $data['first_name'] ?? '';
+        $lastName = $data['last_name'] ?? '';
+        $address = $data['address'] ?? '';
+        $country = $data['country'] ?? '';
+        $phoneNumber = $data['phone_number'] ?? null;
+        $email = $data['mail'] ?? '';
+        $role = $data['role'] ?? 2;
+
+        // Vérifie si l'utilisateur existe déjà
+        $existingUser = $this->userRepository->findOneBy(['username' => $username]);
+
+        if ($existingUser) {
+            return $this->json(['message' => 'Username already exists.'], 400);
+        }
+
+        $user = new Users();
+        $user->setUsername($username);
+        $user->setPassword($this->passwordEncoder->hashPassword($user, $password));
+        $user->setFirstName($firstName);
+        $user->setLastName($lastName);
+        $user->setAddress($address);
+        $user->setCountry($country);
+        $user->setPhoneNumber($phoneNumber);
+        $user->setMail($email);
+        $user->setRole($role);
+        $user->setCreatedAt(new \DateTimeImmutable());
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+        $token = $this->jwtHelper->createToken($user);
+
+        return $this->json([
+            'message' => 'User successfully registered',
             'token' => $token,
             'user' => [
                 'username' => $user->getUsername(),
                 'role' => $user->getRole(),
-       ]
-            ],200);
-
+            ]
+        ], 201);
     }
 
     #[Route('/register', name:'register')]

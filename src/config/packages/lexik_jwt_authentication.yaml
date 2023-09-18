@@ -2,7 +2,7 @@ lexik_jwt_authentication:
     private_key_path: '%kernel.project_dir%/config/jwt/private.pem'   # chemin vers la clé privée
     public_key_path: '%kernel.project_dir%/config/jwt/public.pem'     # chemin vers la clé publique
     pass_phrase: '%env(JWT_PASSPHRASE)%'                               # passphrase pour les clés
-    token_ttl: 3600                                                    # durée de vie du token en secondes
+    token_ttl: null                                               # durée de vie du token en secondes
 
     # Encoder
     encoder:
@@ -11,8 +11,9 @@ lexik_jwt_authentication:
     # Configuration du cookie pour stocker le JWT
     set_cookies:
         token:                                                        # nom du cookie
-            lifetime: 3600                                            # durée de vie du cookie en secondes (null pour une session)
-            samesite: 'strict'                                        # stratégie de same-site
+
+            lifetime: null                                            # durée de vie du cookie en secondes (null pour une session)
+            samesite: 'none'                                        # stratégie de same-site
             path: '/'                                                 # chemin du cookie
             domain: null                                              # domaine du cookie
             httpOnly: true                                            # le cookie ne peut pas être accédé via JavaScript
