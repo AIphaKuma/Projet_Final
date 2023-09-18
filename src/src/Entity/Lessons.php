@@ -38,6 +38,10 @@ class Lessons
     #[ORM\Column]
     private ?int $Chapter = null;
 
+
+    #[ORM\Column(type: 'text')]
+    private ?string $content = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,4 +130,16 @@ class Lessons
 
         return $this;
     }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+        return $this;
+    }
+
 }

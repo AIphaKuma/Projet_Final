@@ -78,7 +78,10 @@ class MasterclassController extends AbstractController
         $em->persist($masterclass);
         $em->flush();
 
-        return $this->json(['message' => 'Masterclass ajouté', 'id' => $masterclass->getId()]);
+        return $this->json([
+            'message' => 'Masterclass ajouté',
+            'id' => $masterclass->getId()
+        ]);
     }
 
     #[Route('/category_masterclasses', name: 'get_all_categories', methods: ['GET'])]
