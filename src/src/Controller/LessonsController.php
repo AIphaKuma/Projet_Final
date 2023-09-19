@@ -95,7 +95,7 @@ class LessonsController extends AbstractController
 
             // Gestion d'erreur a faire
             if (!$video || !$masterclass || !$musicSheet ) {
-                continue; // Ignore this lesson if video or masterclass isn't found.
+                continue; 
             }
 
 
@@ -108,6 +108,7 @@ class LessonsController extends AbstractController
             $lesson->setCreatedBy($user);
             $lesson->setMasterclass($masterclass);
             $lesson->setChapter($currentChapterNumber);
+            $lesson->setContent($lessonData['content']);
 
             //Ajout de la leçon à la masterclass
             $em->persist($lesson);
@@ -129,11 +130,14 @@ class LessonsController extends AbstractController
             'music_sheet' => $lesson->getMusicSheet()->getPath(),
             'composer' => $lesson->getComposer(),
             'duration' => $lesson->getDuration(),
+            'chapter' => $lesson->getChapter(),
+            'content' => $lesson->getContent(),
             'created_at' => $lesson->getCreatedAt() ? $lesson->getCreatedAt()->format('Y-m-d H:i:s') : null,
             'created_by' => $lesson->getCreatedBy() ? $lesson->getCreatedBy()->getUsername() : null // assuming created_by is a User entity with a getUsername method. Check for null in case it's not set.
         ];
     }
 }
+
 
 
 
