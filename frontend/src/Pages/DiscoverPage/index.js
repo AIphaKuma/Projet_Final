@@ -13,6 +13,7 @@ import Footer from "../../Components/Footer";
 import AvantageCard from '../../Components/AvantageCard';
 import SubscriptionCard from '../../Components/SubscriptionCard';
 import TextCard from '../../Components/TextCard';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 
 function Discoverpage() {
@@ -37,9 +38,17 @@ function Discoverpage() {
                         <h1>Découvrez le plus grand catalogue de masterclasses de musique classique</h1>
                     </div>
                     <div className="cards-container">
+                    <Splide aria-label="My Favorite Images">
+                    <SplideSlide>
                         <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
+                        </SplideSlide>
+                        <SplideSlide>
                         <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
+                        </SplideSlide>
+                        <SplideSlide>
                         <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
+                        </SplideSlide>
+                        </Splide>
                     </div>
                 </div>
                 <div className="container3">
