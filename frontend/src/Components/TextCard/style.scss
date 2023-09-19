@@ -1,0 +1,12 @@
+.text-card-container{
+    padding: 40px 10px;
+    border-radius: 32px;
+    &--background{
+        &-variante1{
+            background-color: #EFF0FF;
+        }
+        &-variante2{
+            background-color: #C9C9F6;
+        }
+    }
+}

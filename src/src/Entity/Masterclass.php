@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MasterclassRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MasterclassRepository::class)]
@@ -16,17 +18,9 @@ class Masterclass
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $category = null;
-
-    #[ORM\Column]
-    private ?int $chapter = null;
-
-    #[ORM\Column]
-    private ?int $duration = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $videos = null;
+    #[ORM\ManyToOne(inversedBy: 'masterclasses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategoryMasterclass $category = null;
 
     #[ORM\Column(length: 255)]
     private ?string $comment = null;
@@ -34,8 +28,20 @@ class Masterclass
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'masterclasses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Users $created_by = null;
+
     #[ORM\Column(length: 255)]
-    private ?string $created_by = null;
+    private ?string $level = null;
+
+    #[ORM\OneToMany(mappedBy: 'masterclass', targetEntity: Lessons::class)]
+    private Collection $lessons;
+
+    public function __construct()
+    {
+        $this->lessons = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -54,50 +60,14 @@ class Masterclass
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): ?CategoryMasterclass
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): static
+    public function setCategory(?CategoryMasterclass $category): static
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    public function getChapter(): ?int
-    {
-        return $this->chapter;
-    }
-
-    public function setChapter(int $chapter): static
-    {
-        $this->chapter = $chapter;
-
-        return $this;
-    }
-
-    public function getDuration(): ?int
-    {
-        return $this->duration;
-    }
-
-    public function setDuration(int $duration): static
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-
-    public function getVideos(): ?int
-    {
-        return $this->videos;
-    }
-
-    public function setVideos(?int $videos): static
-    {
-        $this->videos = $videos;
 
         return $this;
     }
@@ -126,14 +96,57 @@ class Masterclass
         return $this;
     }
 
-    public function getCreatedBy(): ?string
+    public function getCreatedBy(): ?Users
     {
         return $this->created_by;
     }
 
-    public function setCreatedBy(string $created_by): static
+
+    public function setCreatedBy(?Users $created_by): static
     {
         $this->created_by = $created_by;
+
+        return $this;
+    }
+
+    public function getLevel(): ?string
+    {
+        return $this->level;
+    }
+
+    public function setLevel(string $level): static
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lessons>
+     */
+    public function getLessons(): Collection
+    {
+        return $this->lessons;
+    }
+
+    public function addLesson(Lessons $lesson): static
+    {
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons->add($lesson);
+            $lesson->setMasterclass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesson(Lessons $lesson): static
+    {
+        if ($this->lessons->removeElement($lesson)) {
+            // set the owning side to null (unless already changed)
+            if ($lesson->getMasterclass() === $this) {
+                $lesson->setMasterclass(null);
+            }
+        }
 
         return $this;
     }

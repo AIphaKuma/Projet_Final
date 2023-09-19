@@ -1,10 +1,19 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Image from '../../../assets/image/index'
+import { Link } from 'react-router-dom';
+
+
 import './style.scss'
 
-function Masterclass({image,title,duration, creator, description, lvl}) {
+function MasterclassCard({image,title,instrument, creator, comment, level, lessons, onClick}) {
+
+    const [isLessonsVisible, setIsLessonsVisible] = useState(false);
+
+    const toggleLessonsVisibility = () => {
+        setIsLessonsVisible(!isLessonsVisible);
+    };
     return (
-        <div className="masterclass-card">
+        <div className="masterclass-card" onClick={onClick}>
             <img src={image} alt={"masterclassimage"}/>
             <div className="masterclass-card-text">
                 <p className="masterclass-creator">{creator}</p>
@@ -12,17 +21,37 @@ function Masterclass({image,title,duration, creator, description, lvl}) {
                 <div className="masterclass-info">
                     <div className="masterclass-lvl">
                         <img src={Image.Circle}/>
-                        <p>Niveau</p>
+                        <p>{level}</p>
                     </div>
                     <div className="masterclass-duration">
                         <img src={Image.Circle}/>
-                        <p>{duration}</p>
+                        <p>{instrument}</p>
                     </div>
                 </div>
-                <p className="masterclass-description">In this session, pianist Jacques Rouvier and his student Julien Braidi work on guiding and determining the trajectory of the piece.</p>
+                <p className="masterclass-description">{comment}</p>
+                <div className="lessons">
+                    <button onClick={toggleLessonsVisibility}>
+                        {isLessonsVisible ? 'Cacher les leçons' : 'Afficher les leçons'}
+                    </button>
+                    {isLessonsVisible && (
+                        <div className="lessons-container">
+                            <h3>Lessons:</h3>
+                            <ul>
+                                <ul>
+                                    {lessons && Object.values(lessons).map((lesson, index) => (
+                                        <li key={lesson.id} >
+                                            <Link to={`/lessons/${lesson.id}`} className="lesson-link"> Lesson ID: {lesson.id}, Name: {lesson.name}, Chapter: {lesson.Chapter}</Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </ul>
+                        </div>
+                    )}
+
+                </div>
             </div>
         </div>
     );
 }
 
-export default Masterclass;
+export default MasterclassCard;

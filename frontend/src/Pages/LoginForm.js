@@ -1,48 +1,44 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useUser } from "../Context/UserContext";
-import './style.scss';
-import Fontawesome from '../api/Fontawesome';
+import {useUser} from "../Context/UserContext";
 
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [lastname, setLastname] = useState('');
     const [error, setError] = useState(null);
-    const [mode, setMode] = useState('login'); // Nouvel état pour suivre le mode
     const Navigate = useNavigate();
     const { login } = useUser();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = mode === 'login' ? 'http://localhost:8080/login' : 'http://localhost:8080/register';
+
+        console.log('Submitting form with:', { username, password }); // Log des données
 
         try {
-            const response = await axios.post(url, {
+            const response = await axios.post('http://localhost:8080/login', {
                 username,
-                password,
-                lastname: mode === 'register' ? lastname : undefined  // Envoyez lastname seulement en mode 'register'
-            });
+                password
+        });
 
 
-            if (mode === 'login') {
-                const jwt = response.data.token;
-                if (jwt) {
-                    document.cookie = `token=${jwt}; path=/`;
-                    login(response.data.user);
-                    Navigate('/dashboard');
-                } else {
-                    setError('Échec de l\'authentification. Veuillez réessayer.');
-                }
+            console.log('Response from server:', response);
 
+            const user = response.data.user;
+
+            if (user) {
+                console.log('User:', user); // Log du JWT stocké
+                login(response.data.user);
+                Navigate('/dashboard');
             } else {
-                // Gérez le succès de l'inscription ici, si nécessaire
-                Navigate('/login');
+                console.error('JWT not found in response:', response.data);
+                setError('Authentication failed. Please try again.');
             }
 
         } catch (err) {
+            console.error('Error during login:', err); // Log des erreurs
+
+            // Affichez une erreur détaillée si elle est fournie dans la réponse
             if (err.response && err.response.data && err.response.data.message) {
                 setError(err.response.data.message);
             } else {
@@ -50,40 +46,20 @@ const LoginForm = () => {
             }
         }
     };
-return (
-        <div className='connect'>
-            {/* Boutons pour basculer entre les modes connexion et inscription */}
 
-            <div className='switch'>
-                <button onClick={() => setMode('login')} style={{ backgroundColor: mode === 'login' ? '#fff' : 'transparent' }}>Connexion</button>
-                <button onClick={() => setMode('register')} style={{ backgroundColor: mode === 'register' ? '#fff' : 'transparent' }}>Inscription</button>
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Username: </label>
+                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
             </div>
-
-
-            <form onSubmit={handleSubmit} className='formulaire'>
-                <div className='group'>
-                    <Fontawesome />
-                <i className="fas fa-arrow-right"></i> Cliquez ici
-                    <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-                    <label>Nom d'utilisateur : </label>
-                </div>
-
-                {mode === 'register' && (
-                    <div className='group'>
-                        <input type="text" value={lastname} onChange={e => setLastname(e.target.value)} />
-                        <label>Nom de famille : </label>
-                    </div>
-                )}
-                
-                <div className='group'>
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <label>Mot de passe : </label>
-                    <span class="highlight"></span>
-                </div>
-                {error && <div>{error}</div>}
-                <button type="submit" className='button-form'>{mode === 'login' ? 'Se connecter' : 'S\'inscrire'}</button>
-            </form>
-        </div>
+            <div>
+                <label>Password: </label>
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            </div>
+            {error && <div>{error}</div>}
+            <button type="submit">Login</button>
+        </form>
     );
 }
 

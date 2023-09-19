@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -46,8 +48,21 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\Column]
-    private ?int $role = null;
+    #[ORM\ManyToOne(targetEntity: Role::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Role $role= null;
+
+    #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Masterclass::class)]
+    private Collection $masterclasses;
+
+    #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Lessons::class)]
+    private Collection $lessons;
+
+    public function __construct()
+    {
+        $this->masterclasses = new ArrayCollection();
+        $this->lessons = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -210,14 +225,74 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getUsername();
     }
 
-    public function getRole(): ?int
+    public function getRole(): ?Role
     {
         return $this->role;
     }
 
-    public function setRole(int $role): static
+    public function setRole(?Role $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Masterclass>
+     */
+    public function getMasterclasses(): Collection
+    {
+        return $this->masterclasses;
+    }
+
+    public function addMasterclass(Masterclass $masterclass): static
+    {
+        if (!$this->masterclasses->contains($masterclass)) {
+            $this->masterclasses->add($masterclass);
+            $masterclass->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMasterclass(Masterclass $masterclass): static
+    {
+        if ($this->masterclasses->removeElement($masterclass)) {
+            // set the owning side to null (unless already changed)
+            if ($masterclass->getCreatedBy() === $this) {
+                $masterclass->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lessons>
+     */
+    public function getLessons(): Collection
+    {
+        return $this->lessons;
+    }
+
+    public function addLesson(Lessons $lesson): static
+    {
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons->add($lesson);
+            $lesson->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesson(Lessons $lesson): static
+    {
+        if ($this->lessons->removeElement($lesson)) {
+            // set the owning side to null (unless already changed)
+            if ($lesson->getCreatedBy() === $this) {
+                $lesson->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }
