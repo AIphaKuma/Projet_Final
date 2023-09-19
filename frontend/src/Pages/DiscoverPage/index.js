@@ -37,18 +37,23 @@ function Discoverpage() {
                         <h2>Nos Masterclass</h2>
                         <h1>Découvrez le plus grand catalogue de masterclasses de musique classique</h1>
                     </div>
-                    <div className="cards-container">
+                    <div className="cards-container only-mobile">
                     <Splide aria-label="My Favorite Images">
                     <SplideSlide>
                         <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
-                        </SplideSlide>
-                        <SplideSlide>
+                    </SplideSlide>
+                    <SplideSlide>
                         <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
-                        </SplideSlide>
-                        <SplideSlide>
+                    </SplideSlide>
+                    <SplideSlide>
                         <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
-                        </SplideSlide>
-                        </Splide>
+                    </SplideSlide>
+                    </Splide>
+                    </div>
+                    <div className='cards-container only-desktop'>
+                    <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
+                    <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
+                    <Card title={"Voici le titre test"} instrument={"piano"} author={"nathan"} description={"nreijznvinvpr zeiprj vnpzerjv bzeprivnpezmezierzbnrezupmnvzjeiuberz"} background={Images.MasterClass1}></Card>
                     </div>
                 </div>
                 <div className="container3">

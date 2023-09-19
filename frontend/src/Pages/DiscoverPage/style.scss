@@ -209,3 +209,15 @@
   align-items: flex-start;
   }
 }
+
+@media screen and (min-width: 700px){
+  .only-mobile{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 700px){
+  .only-desktop{
+    display: none;
+  }
+}
