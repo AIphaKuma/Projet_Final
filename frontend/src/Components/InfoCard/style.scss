@@ -1,0 +1,19 @@
+@import "../../styles/common/colors";
+
+
+.masterclass-info-card{
+  background-color: #D9D9D9;
+  border-radius: 20px;
+  width: 340px;
+  height: 500px;
+  .title{
+    text-align: center;
+    margin: 0;
+    background-color: $grey;
+    border-radius: 20px 20px 0 0;
+    height: 80px;
+  }
+  .masterclass-info-text{
+    margin: 10px 20px 0 20px;
+  }
+}
