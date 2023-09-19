@@ -1,10 +1,19 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Image from '../../../assets/image/index'
+import { Link } from 'react-router-dom';
+
+
 import './style.scss'
 
-function MasterclassCard({image,title,instrument, creator, comment, level, lessons}) {
+function MasterclassCard({image,title,instrument, creator, comment, level, lessons, onClick}) {
+
+    const [isLessonsVisible, setIsLessonsVisible] = useState(false);
+
+    const toggleLessonsVisibility = () => {
+        setIsLessonsVisible(!isLessonsVisible);
+    };
     return (
-        <div className="masterclass-card">
+        <div className="masterclass-card" onClick={onClick}>
             <img src={image} alt={"masterclassimage"}/>
             <div className="masterclass-card-text">
                 <p className="masterclass-creator">{creator}</p>
@@ -21,16 +30,24 @@ function MasterclassCard({image,title,instrument, creator, comment, level, lesso
                 </div>
                 <p className="masterclass-description">{comment}</p>
                 <div className="lessons">
-                    <h3>Lessons:</h3>
-                    <ul>
-                        <ul>
-                            {lessons && Object.values(lessons).map((lesson, index) => (
-                                <li key={lesson.id}>
-                                    Lesson ID: {lesson.id}, Name: {lesson.name}, Chapter: {lesson.Chapter}
-                                </li>
-                            ))}
-                        </ul>
-                    </ul>
+                    <button onClick={toggleLessonsVisibility}>
+                        {isLessonsVisible ? 'Cacher les leçons' : 'Afficher les leçons'}
+                    </button>
+                    {isLessonsVisible && (
+                        <div className="lessons-container">
+                            <h3>Lessons:</h3>
+                            <ul>
+                                <ul>
+                                    {lessons && Object.values(lessons).map((lesson, index) => (
+                                        <li key={lesson.id} >
+                                            <Link to={`/lessons/${lesson.id}`} className="lesson-link"> Lesson ID: {lesson.id}, Name: {lesson.name}, Chapter: {lesson.Chapter}</Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </ul>
+                        </div>
+                    )}
+
                 </div>
             </div>
         </div>

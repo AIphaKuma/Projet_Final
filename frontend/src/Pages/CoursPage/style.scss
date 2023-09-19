@@ -1,0 +1,41 @@
+@import "../../../src/styles/common/colors";
+
+.masterclass-cours{
+  background-image: linear-gradient(to bottom, #454D79, #9999C4, #EFF0FF);
+}
+
+.subtitle{
+  font-size: 48px;
+  color: $white;
+}
+
+.gradient-text{
+  background-image: linear-gradient(to right, #CC57D2, white, #161C3D);
+  -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+  background-clip: text;
+  color: transparent; /* Rend le texte d'origine invisible */
+  line-break: inherit;
+  margin: 0;
+  text-align: left;
+  font-size: 22px; /* Taille de la police, à ajuster selon vos besoins */
+  font-weight: bold; /* Gras, si désiré */
+}
+
+.content{
+  font-size: 24px;
+  color: $black;
+}
+
+.content-title{
+  font-size: 36px ;
+  color: $white;
+}
+
+
+.masterclass-cours{
+  padding: 30px;
+}
+
+iframe{
+  border-radius: 30px;
+}
