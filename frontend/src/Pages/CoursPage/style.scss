@@ -2,28 +2,43 @@
 
 .masterclass-cours{
   background-image: linear-gradient(to bottom, #454D79, #9999C4, #EFF0FF);
+  padding: 100px;
+}
+
+.masterclass-body-container{
+  display: flex;
+  gap: 30px;
 }
 
 .subtitle{
+  margin: 5px 0 10px 0;
   font-size: 48px;
   color: $white;
 }
 
+.header{
+  margin-bottom: 30px;
+}
+
 .gradient-text{
   background-image: linear-gradient(to right, #CC57D2, white, #161C3D);
-  -webkit-background-clip: text; /* Pour les navigateurs basés sur Webkit (Safari, Chrome) */
+  font-family: 'Inter', sans-serif; /* Assurez-vous d'avoir 'Inter' comme nom de police */
+  font-weight: 400; /* Poids de la police : Regular */
+  -webkit-background-clip: text;
   background-clip: text;
-  color: transparent; /* Rend le texte d'origine invisible */
+  color: transparent;
   line-break: inherit;
   margin: 0;
   text-align: left;
-  font-size: 22px; /* Taille de la police, à ajuster selon vos besoins */
-  font-weight: bold; /* Gras, si désiré */
+  font-size: 22px;
 }
 
 .content{
   font-size: 24px;
   color: $black;
+  margin-right: 400px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
 }
 
 .content-title{
@@ -32,10 +47,12 @@
 }
 
 
-.masterclass-cours{
-  padding: 30px;
-}
+
 
 iframe{
   border-radius: 30px;
+}
+
+.tabs{
+  margin-bottom: 20px;
 }

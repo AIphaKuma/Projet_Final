@@ -6,7 +6,7 @@ import {useParams} from "react-router-dom";
 
 import './style.scss'
 
-function LessonPage({description, title, subtitle,partition, match}) {
+function LessonPage() {
 
 
     const [activeTab, setActiveTab] = useState(0);
@@ -37,13 +37,14 @@ function LessonPage({description, title, subtitle,partition, match}) {
             element = (
                 <div className="masterclass-tab">
                     <div className="masterclass-tab-title">
-                        <p className="content-title gradient-text3">
-                            {lesson.name}
-                        </p>
-                        <p className="content-subtitle">
+                        <p className="content-subtitle gradient-text">
                             A propos de cette Masterclass
                         </p>
-                        <p className="content">{lesson.content}</p>
+                        <p className="content-title gradient-text">
+                            {lesson.timestamp}
+                        </p>
+                        <p className="content">Jacques Rouvier et son élève Julien Braidi travaillent à développer une trajectoire musicale et à jouer de manière expressive. De plus, la paire travaille sur des aspects plus techniques tels que jouer avec une bonne posture, doigté et créer un son plus profond en appliquant plus de pression sur les touches du bout des doigts.
+                        </p>
                     </div>
 
                 </div>
@@ -59,25 +60,27 @@ function LessonPage({description, title, subtitle,partition, match}) {
     }
 
     const renderMasterclassesInfo = () => {
-        // Vérification de l'existence de masterclass avant le mappage
         if (!masterclassInfo) {
             return null;
         }
-        return masterclassInfo.map(n => <MasterclassInfo masterclassInfo={n} key={n.id} title={n.name}  image={n.image} description={n.description} />);
+        return <MasterclassInfo date={lesson.created_at} composer={lesson.composer} duree={lesson.duration} title={lesson.title} />;
     };
 
     return (
         <div className="masterclass-cours">
-            <div>
-                <p className="title gradient-text">Partita No. 2 </p>
-                <p className="subtitle"> Johann Sebastian Bach Jacques Rouvier's masterclass</p>
+            <div className="header">
+                <p className="title gradient-text">{lesson.name}</p>
+                <p className="subtitle"> {lesson.composer}</p>
+                <p className="subtitle"> {lesson.created_by} Masterclass</p>
+
             </div>
             <div className="masterclass-body-container">
                 <div className="video">
-                    <iframe width="860" height="550"         src={`https://www.youtube.com/embed/${lesson.video}`}
+                    <iframe width="1060" height="650"         src={`https://www.youtube.com/embed/${lesson.video}`}
                             title="YouTube video player" frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen></iframe>
+                            allowFullScreen>
+                    </iframe>
                 </div>
                 <div className="info">
                     {renderMasterclassesInfo()}
