@@ -89,7 +89,7 @@ class SecurityController extends AbstractController
         $country = $data['country'] ?? '';
         $phoneNumber = $data['phone_number'] ?? null;
         $email = $data['mail'] ?? '';
-        $role = $data['role'] ?? 2;
+        $role = 2;
 
         // Vérifie si l'utilisateur existe déjà
         $existingUser = $this->userRepository->findOneBy(['username' => $username]);

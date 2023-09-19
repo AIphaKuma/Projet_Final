@@ -16,13 +16,14 @@ const RegisterForm = () => {
         address: '',
         // country: '',
         phone_number: '',
+        role: 'User - 2',
         username: '',
         password: '',
         mail: '',
     });
     const [error, setError] = useState(null);
     const { register } = useUser();
-    const { first_name, last_name, address, country, phone_number, username, password, mail } = formData;
+    const { first_name, last_name, address, country, phone_number, role_id, username, password, mail } = formData;
     const Navigate = useNavigate();
     const [currentStep, setCurrentStep] = useState(1);
 
@@ -94,7 +95,7 @@ const RegisterForm = () => {
                     <div className='group'> 
                         <input type="text" name="address" value={address} onChange={onChange} /> 
                         <i className="fa-regular fa-map icon-arrow"></i>
-                        <label>Adressee</label>
+                        <label>Adresse</label>
                     </div>
 
 
@@ -133,7 +134,7 @@ const RegisterForm = () => {
                 <div className='group'>      
                     <input type="text" name="username" value={username}  onChange={onChange} />
                     <i className="fa-regular fa-envelope icon-arrow"></i>
-                    <label>Nom utulisateurs</label>
+                    <label>Nom d'utilisateur</label>
                 </div>
 
                 <div className='group'>      
