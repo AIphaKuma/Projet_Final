@@ -55,6 +55,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Masterclass::class)]
     private Collection $masterclasses;
 
+    #[ORM\OneToMany(targetEntity:"Book", mappedBy:"Users")]
+    private $book;
+
     #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Lessons::class)]
     private Collection $lessons;
 
@@ -62,6 +65,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->masterclasses = new ArrayCollection();
         $this->lessons = new ArrayCollection();
+        $this->book = new ArrayCollection();
     }
 
     public function getId(): ?int
