@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
-
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -57,6 +56,7 @@ class Event
     public function setNumberLike(int $number_like): static
     {
         $this->number_like = $number_like;
+    }
 
     public function getName(): ?string
     {
@@ -118,14 +118,14 @@ class Event
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getEventDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->event_date;
     }
 
-    public function setDate(?\DateTimeInterface $date): static
+    public function setEventDate(?\DateTimeInterface $event_date): static
     {
-        $this->date = $date;
+        $this->event_date = $event_date;
 
         return $this;
     }

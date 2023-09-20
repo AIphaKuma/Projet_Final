@@ -12,6 +12,8 @@ import LoginPage from './Pages/LoginPage';
 import MasterclassCard from "./Pages/CoursPage";
 import LessonPage from "./Pages/CoursPage";
 import UploadLesson from'./Pages/UploadPage';
+import EventPage from'./Pages/EventPage';
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
               <Route path={"/discover"} element={<DiscoverPage/>} />
               <Route path={"/add-masterclass"} element={<AddMasterclassForm/>}/>
               <Route path={"/masterclass"} element={<MasterclassPage/>}/>
+              <Route path={"/event"} element={<EventPage/>}/>
               <Route path="/lessons/:lessonId" element={<LessonPage />} /> {/* Nouvelle route pour la page de leçon */}
               <Route path={"/upload-lesson"} element={<UploadLesson/>}/>
             </Routes>
