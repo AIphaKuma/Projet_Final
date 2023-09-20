@@ -1,7 +1,7 @@
 # Projet Final P2023
 
  Stack tech :
-Back-End : Symfony | Front-End : Raect | BDD : MariaDB |API : Axios
+Back-End : Symfony | Front-End : React | BDD : MariaDB | API : Axios
 
 Pour lancer le projet :
 ````
