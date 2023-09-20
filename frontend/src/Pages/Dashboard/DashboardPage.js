@@ -43,7 +43,7 @@ function Dashboard() {
                                 </div>
                                 <div className={`icon-nav2 ${isSubMenuOpen ? 'sub-menu-open' : ''}`} onClick={toggleSubMenu}>
                                         <div className= "box-icon2">
-                                        <i class="fa-solid fa-video"></i>
+                                        <i className="fa-solid fa-video"></i>
                                         <div className="dashboard-category">Masterclass</div>
                                         </div>
                                     
@@ -56,22 +56,22 @@ function Dashboard() {
                                                
                                 
                                 <div className="icon-nav3">
-                                    <i class="fa-regular fa-bell">
+                                    <i className="fa-regular fa-bell">
                                     </i>
                                     <div className="dashboard-category">Notifications</div>
                                 </div>
                                 <div className="icon-nav4">
-                                    <i class="fa-regular fa-message">
+                                    <i className="fa-regular fa-message">
                                     </i>
                                     <div className="dashboard-category">Messagerie</div>
                                 </div>
                                 <div className="icon-nav5">
-                                    <i class="fa-regular fa-calendar">
+                                    <i className="fa-regular fa-calendar">
                                     </i>
                                     <div className="dashboard-category">Rendez-vous</div>
                                 </div>
                                 <div className="icon-nav6">
-                                    <i class="fa-solid fa-arrow-right-from-bracket">
+                                    <i className="fa-solid fa-arrow-right-from-bracket">
                                     </i>
                                     <div className="dashboard-category">Déconnexion</div>
                                 </div>

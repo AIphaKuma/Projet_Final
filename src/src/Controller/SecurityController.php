@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Entity\Role;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -89,7 +90,12 @@ class SecurityController extends AbstractController
         $country = $data['country'] ?? '';
         $phoneNumber = $data['phone_number'] ?? null;
         $email = $data['mail'] ?? '';
-        $role = $data['role'] ?? 2;
+        $roleRepository = $entityManager->getRepository(Role::class);
+        $role = $roleRepository->find(2);  // ID 2 est ici en dur
+
+        if (!$role) {
+            return new JsonResponse(['error' => 'Rôle non trouvé'], 400);
+        }
 
         // Vérifie si l'utilisateur existe déjà
         $existingUser = $this->userRepository->findOneBy(['username' => $username]);
@@ -108,6 +114,7 @@ class SecurityController extends AbstractController
         $user->setPhoneNumber($phoneNumber);
         $user->setMail($email);
         $user->setRole($role);
+        $user->setCategory(0);
         $user->setCreatedAt(new \DateTimeImmutable());
 
         $entityManager->persist($user);
