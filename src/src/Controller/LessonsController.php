@@ -133,8 +133,6 @@ class LessonsController extends AbstractController
                 // Capture des erreurs lors de la persistance
                 $failedLessons[] = ['data' => $lessonData, 'reason' => $e->getMessage()];
             }
-            $em->persist($lesson);
-            $createdLessonIds[] = $lesson->getId();
         }
 
         // Si aucune leçon n'a échoué, tout va bien
@@ -147,11 +145,21 @@ class LessonsController extends AbstractController
 
     private function transformLesson(Lessons $lesson): array
     {
+        $timeStamps = $lesson->getVideos()->getTimeStamps();
+        $timeStampData = [];
+        foreach ($timeStamps as $timeStamp) {
+            $timeStampData[] = [
+                'start_time' => $timeStamp->getStartTime(),
+                'end_time' => $timeStamp->getEndTime(),
+                'label' => $timeStamp->getLabel()
+            ];
+        }
+
         return [
             'id' => $lesson->getId(),
             'name' => $lesson->getName(),
             'video' => $lesson->getVideos()->getLink(),
-            'time_stamp' => $lesson->getVideos()->getTimeStamps(),
+            'time_stamp' => $timeStampData,
             'music_sheet' => $lesson->getMusicSheet()->getPath(),
             'composer' => $lesson->getComposer(),
             'duration' => $lesson->getDuration(),
