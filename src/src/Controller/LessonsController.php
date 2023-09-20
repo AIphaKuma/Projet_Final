@@ -153,6 +153,8 @@ class LessonsController extends AbstractController
             'video' => $lesson->getVideos()->getLink(),
             'time_stamp' => $lesson->getVideos()->getTimeStamps(),
             'music_sheet' => $lesson->getMusicSheet()->getPath(),
+            'composer' => $lesson->getComposer(),
+            'duration' => $lesson->getDuration(),
             'chapter' => $lesson->getChapter(),
             'content' => $lesson->getContent(),
             'composer' => $lesson->getComposer(),
