@@ -1,15 +1,20 @@
 @import "../../styles/common/colors";
 
-.profile-picture-container{
+.mini-profile-picture-container{
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: $lightgrey;
+  border-radius: 20px;
+  padding: 0 15px 0 4px;
+  height: 38px;
+
 }
 
-.circle {
-  width: 50px; /* Largeur du cercle */
-  height: 50px; /* Hauteur du cercle */
-  border: 5px solid $third; /* Bordure de 5px */
+.mini-circle {
+  width: 18px; /* Largeur du cercle */
+  height: 18px; /* Hauteur du cercle */
+  border: 2px solid $third; /* Bordure de 5px */
   border-radius: 50%; /* Crée un cercle */
   display: flex;
   justify-content: center;
@@ -21,7 +26,7 @@
   position: relative;
 }
 
-.circle-image {
+.mini-circle-image {
   width: 100%; /* Ajuste la taille de l'image pour remplir le cercle */
   height: 100%; /* Ajuste la taille de l'image pour remplir le cercle */
   object-fit: cover; /* Redimensionne l'image pour qu'elle remplisse le conteneur */
@@ -31,38 +36,36 @@
   left: 0;
 }
 
-.notifications {
-  width: 30px; /* Largeur du cercle avec le chiffre */
-  height: 30px; /* Hauteur du cercle avec le chiffre */
+.mini-notifications {
+  width: 6px; /* Largeur du cercle avec le chiffre */
+  height: 6px; /* Hauteur du cercle avec le chiffre */
   background-color: $third; /* Couleur du cercle avec le chiffre */
   border-radius: 50%; /* Crée un cercle */
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute; /* Positionne le cercle avec le chiffre par rapport au cercle parent */
-  top: -10px;
-  right: -7px;
+  top: -4px;
+  right: -4px;
   z-index: 1;
 }
 
-.number {
+.mini-number {
   font-size: 16px; /* Taille de la police du chiffre */
   color: $white; /* Couleur du chiffre */
   font-weight: bold; /* Éventuellement, mettez le chiffre en gras */
 }
 
-.profile-picture-text{
+.mini-profile-picture-text{
   display: flex;
-  flex-direction: column;
-  padding: 0 0 15px 15px;
-  .profile-picture-username{
-    font-size: 28px;
-    color: $white;
+  padding: 0 0 0 15px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  .mini-profile-picture-username{
+    font-size: 18px;
+    color: $black;
     margin-bottom: 0;
-  }
-  .profile-picture-role{
-    font-size: 14px;
-    color: $white;
-    margin-top: 0;
+    align-items: center;
   }
 }

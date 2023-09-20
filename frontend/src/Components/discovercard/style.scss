@@ -5,17 +5,34 @@
   background-color: $secondaryblue;
   border-radius: 20px;
   height: 180px;
-  width: 440px;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 10px;
   .discovercard-text{
     font-size: 32px;
-    margin-right: 200px;
+    // margin-right: 200px;
     padding-left: 20px;
   }
   .pw-button{
     margin-bottom: 20px;
   }
 }
+
+@media (max-width: 890px){
+  .discovercard-container{
+    width: 70%;   
+  }  
+}
+
+@media (max-width: 767px){
+  .discovercard-container{
+    width: 90%;
+    .discovercard-text{
+      font-size: 20px;
+    }
+  }  
+}
+
+

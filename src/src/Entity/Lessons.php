@@ -180,6 +180,7 @@ class Lessons
         return $this;
     }
 
+
     /**
      * @return Collection<int, TimeStamp>
      */
@@ -211,3 +212,4 @@ class Lessons
     }
 
 }
+
