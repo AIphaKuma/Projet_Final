@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../../axios/axiosConfig';
 import { useParams, useNavigate } from 'react-router-dom';
 import UploadMusicSheet from "../../Components/UploadMusicSheet";
+import './styles.scss'
 
 const config = {
     headers: {
@@ -73,20 +74,35 @@ const UploadLesson = () => {
     };
 
     return (
-        <div>
+        <div className="form">
             <h2>Ajouter une leçon</h2>
-            <div>
+            <div className="upload_file">
                 <UploadMusicSheet onUploadSuccess={handleMusicSheetUploadSuccess}></UploadMusicSheet>
-                <input type="text" name="name" value={name} placeholder="Nom de la leçon" onChange={(e) => setName(e.target.value)} />
-                <input type="text" name="videoId" value={videoId} placeholder="ID de la vidéo" onChange={(e) => setVideoId(e.target.value)} />
-                <input type="text" name="composer" value={composer} placeholder="Compositeur de la leçon" onChange={(e) => setComposer(e.target.value)} />
-                <input type="text" name="duration" value={duration} placeholder="durée" onChange={(e) => setDuration(e.target.value)} />
-                <textarea name="content" value={content} placeholder="Contenu de la leçon" onChange={(e) => setContent(e.target.value)}></textarea>
-
+            </div>
+            <div className="form-data">
+                <div className={name ? "group filled" : "group"}>
+                    <input type="text" name="name" value={name} placeholder="" onChange={(e) => setName(e.target.value)} />
+                    <label> Nom de la leçon </label>
+                </div>
+                <div className={videoId ? "group filled" : "group"}>
+                    <input type="text" name="videoId" value={videoId} placeholder="" onChange={(e) => setVideoId(e.target.value)} />
+                    <label> ID du lien Youtube </label>
+                </div>
+                <div className={composer ? "group filled" : "group"}>
+                    <input type="text" name="composer" value={composer} placeholder="" onChange={(e) => setComposer(e.target.value)} />
+                    <label> Compositeur de la leçon </label>
+                </div>
+                <div className={duration ? "group filled" : "group"}>
+                    <input type="text" name="duration" value={duration} placeholder="" onChange={(e) => setDuration(e.target.value)} />
+                    <label> Durée </label>
+                </div>
+                <div className="group">
+                    <textarea name="content" value={content} placeholder="Contenu de la leçon" onChange={(e) => setContent(e.target.value)}></textarea>
+                </div>
             </div>
 
             {errorMessage && <div className="error">{errorMessage}</div>}
-            <button onClick={addLesson}>Ajouter la leçon</button>
+            <button onClick={addLesson}>AJOUTER LA LEÇON</button>
         </div>
     );
 };

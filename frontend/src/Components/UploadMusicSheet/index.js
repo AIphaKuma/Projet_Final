@@ -48,10 +48,10 @@ function UploadMusicSheet({ onUploadSuccess }) {
     };
 
     return (
-        <div>
+        <div className="upload-container">
             <h3>Upload de Partitions Musicales</h3>
-            <input type="file" accept=".pdf" onChange={handleFileChange} />
-            <button onClick={handleUpload} disabled={isLoading}>Upload</button>
+            <input type="file" accept=".pdf" onChange={handleFileChange} className="inputFile" />
+            <button onClick={handleUpload} disabled={isLoading}>UPLOAD</button>
             {message && <p>{message}</p>}
         </div>
     );
