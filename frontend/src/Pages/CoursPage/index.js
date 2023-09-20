@@ -5,6 +5,7 @@ import axios from 'axios';
 import {useParams} from "react-router-dom";
 
 import './style.scss'
+import NavbarDashboard from "../../Components/NavbarDashboard";
 
 function LessonPage() {
 
@@ -67,7 +68,10 @@ function LessonPage() {
     };
 
     return (
-        <div className="masterclass-cours">
+        <>
+        <NavbarDashboard></NavbarDashboard>
+
+    <div className="masterclass-cours">
             <div className="header">
                 <p className="title gradient-text">{lesson.name}</p>
                 <p className="subtitle"> {lesson.composer}</p>
@@ -97,6 +101,7 @@ function LessonPage() {
             </div>
 
         </div>
+        </>
     );
 }
 

@@ -1,19 +1,13 @@
 // Dashboard.js
 // import React from 'react';
 import React, { useState } from 'react';
-import { useUser } from '../../Context/UserContext';
 import Discovercard from "../../Components/discovercard";
 
-import ProfilePicture from "../../Components/ProfilPicture";
 import SessionCard from "../../Components/SessionCard";
-
-
 import NavbarDashboard from "../../Components/NavbarDashboard";
-
-import Image from "../../assets/image";
 import Fontawesome from '../../api/Fontawesome';
+
 import './style.scss'
-import MiniProfile from '../../Components/MiniProfil';
 
 
 

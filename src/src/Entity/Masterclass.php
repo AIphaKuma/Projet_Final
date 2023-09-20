@@ -38,9 +38,6 @@ class Masterclass
     #[ORM\OneToMany(mappedBy: 'masterclass', targetEntity: Lessons::class)]
     private Collection $lessons;
 
-    #[ORM\Column]
-    private ?int $number_like = null;
-
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
@@ -150,18 +147,6 @@ class Masterclass
                 $lesson->setMasterclass(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getNumberLike(): ?int
-    {
-        return $this->number_like;
-    }
-
-    public function setNumberLike(int $number_like): static
-    {
-        $this->number_like = $number_like;
 
         return $this;
     }
