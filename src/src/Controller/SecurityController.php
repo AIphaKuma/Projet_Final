@@ -91,13 +91,13 @@ class SecurityController extends AbstractController
         $phoneNumber = $data['phone_number'] ?? null;
         $email = $data['mail'] ?? '';
         $roleRepository = $entityManager->getRepository(Role::class);
-        $role = $roleRepository->find(2);  // ID 2 est ici en dur
+        $role = $roleRepository->find(2); 
 
         if (!$role) {
             return new JsonResponse(['error' => 'Rôle non trouvé'], 400);
         }
 
-        // Vérifie si l'utilisateur existe déjà
+
         $existingUser = $this->userRepository->findOneBy(['username' => $username]);
 
         if ($existingUser) {

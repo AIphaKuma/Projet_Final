@@ -105,6 +105,10 @@ function MasterclassPage() {
                 comment={n.comment}
                 lessons={lessons[n.id]}
                 instrument={n.category}
+                id={n.id}
+                initialLikeCount={n.id}
+                initiallyLiked={n.id}
+
             />
         ));
     };

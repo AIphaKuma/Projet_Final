@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import Image from '../../../assets/image/index'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 import './style.scss'
@@ -12,6 +14,22 @@ function MasterclassCard({image,title,instrument, creator, comment, level, lesso
     const toggleLessonsVisibility = () => {
         setIsLessonsVisible(!isLessonsVisible);
     };
+
+    const LikeButton = ({ masterclassId, initialCount, initiallyLiked }) => {
+        const [likeCount, setLikeCount] = useState(initialCount);
+        const [hasLiked, setHasLiked] = useState(initiallyLiked);
+      
+      
+        const toggleLike = async () => {
+          try {
+            const response = await axios.post(`/masterclass/like/${masterclassId}`);
+            setLikeCount(response.data.likes);
+            setHasLiked(!hasLiked);
+          } catch (error) {
+            console.error('Une erreur est survenue lors du like:', error);
+          }
+        };
+      
     return (
         <div className="masterclass-card" onClick={onClick}>
             <img src={image} alt={"masterclassimage"}/>
@@ -33,6 +51,9 @@ function MasterclassCard({image,title,instrument, creator, comment, level, lesso
                     <button onClick={toggleLessonsVisibility}>
                         {isLessonsVisible ? 'Cacher les leçons' : 'Afficher les leçons'}
                     </button>
+                    <button onClick={toggleLike}>
+                        {hasLiked ? 'Retirer le like' : 'Ajouter un like'} ({likeCount})
+                    </button>
                     {isLessonsVisible && (
                         <div className="lessons-container">
                             <h3>Lessons:</h3>
@@ -52,6 +73,7 @@ function MasterclassCard({image,title,instrument, creator, comment, level, lesso
             </div>
         </div>
     );
+};
 }
 
 export default MasterclassCard;

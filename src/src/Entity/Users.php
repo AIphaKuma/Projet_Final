@@ -58,10 +58,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'created_by', targetEntity: Lessons::class)]
     private Collection $lessons;
 
+
+    #[ORM\ManyToMany(targetEntity:Masterclass::class, mappedBy:"usersLiked")]
+    private $likedMasterclasses;
+
     public function __construct()
     {
         $this->masterclasses = new ArrayCollection();
         $this->lessons = new ArrayCollection();
+        $this->likedMasterclasses = new ArrayCollection();
     }
 
     public function getId(): ?int

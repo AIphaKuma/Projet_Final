@@ -6,6 +6,7 @@ use App\Repository\MasterclassRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Users;
 
 #[ORM\Entity(repositoryClass: MasterclassRepository::class)]
 class Masterclass
@@ -41,9 +42,14 @@ class Masterclass
     #[ORM\Column]
     private ?int $number_like = null;
 
+
+    #[ORM\ManyToMany(targetEntity:Users::class, inversedBy:"likedMasterclasses")]
+    private $usersLiked;
+
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
+        $this->usersLiked = new ArrayCollection();
     }
 
     public function getId(): ?int

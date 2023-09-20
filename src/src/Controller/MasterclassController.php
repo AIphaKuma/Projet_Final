@@ -37,6 +37,18 @@ class MasterclassController extends AbstractController
         return $this->json($this->transformMasterclass($masterclass));
     }
 
+    #[Route('/masterclass/like/{id}', name: 'masterclass_like')]
+    public function like(Masterclass $masterclass, EntityManagerInterface $em, int $id): Response
+    {
+        $currentLikes = $masterclass->getNumberLike();
+        $masterclass->setNumberLike(1);
+        
+        $em->persist($masterclass);
+        $em->flush();
+
+        return new JsonResponse(['likes' => $masterclass->getNumberLike()]);
+    }
+
     #[Route('/masterclass', name: 'get_allmasterclass')]
     public function getAllMasterclass(): Response
     {
@@ -74,6 +86,7 @@ class MasterclassController extends AbstractController
         $masterclass->setComment($data['comment']);
         $masterclass->setCreatedAt(new \DateTimeImmutable());
         $masterclass->setCreatedBy($this->getUser());
+        $masterclass->setNumberLike(0);
 
         $em->persist($masterclass);
         $em->flush();
@@ -107,6 +120,7 @@ class MasterclassController extends AbstractController
             'category' => $masterclass->getCategory()->getName(), // assuming the category is an entity with a getName method
             'level' => $masterclass->getLevel(),
             'comment' => $masterclass->getComment(),
+            'number_like' => $masterclass->getNumberLike(),
             'created_at' => $masterclass->getCreatedAt() ? $masterclass->getCreatedAt()->format('Y-m-d H:i:s') : null,
             'created_by' => $masterclass->getCreatedBy() ? $masterclass->getCreatedBy()->getUsername() : null
         ];
