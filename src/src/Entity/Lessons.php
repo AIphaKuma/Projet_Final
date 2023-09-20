@@ -42,13 +42,11 @@ class Lessons
     #[ORM\Column(type: 'text')]
     private ?string $content = null;
 
-
     #[ORM\Column(length: 255)]
     private ?string $composer = null;
 
     #[ORM\Column]
     private ?int $duration = null;
-
 
     public function getId(): ?int
     {
@@ -150,7 +148,6 @@ class Lessons
         return $this;
     }
 
-
     public function getComposer(): ?string
     {
         return $this->composer;
@@ -164,7 +161,6 @@ class Lessons
     }
 
     public function getDuration(): ?int
-
     {
         return $this->duration;
     }
@@ -175,8 +171,3 @@ class Lessons
 
         return $this;
     }
-
-}
-
-
-

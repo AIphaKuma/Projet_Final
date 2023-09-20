@@ -42,9 +42,9 @@ const AddMasterclassForm = () => {
                 comment
             }, config);
 
-            if (response.data && response.data.message === 'Masterclass added successfully') {
+            if (response.data && response.data.message === 'Masterclass ajouté') {
                 alert('Masterclass ajoutée avec succès!');
-                Navigate('/dashboard');
+                Navigate(`/upload-lesson/${response.data.id}`);
             } else {
                 setErrorMessage("Erreur lors de l'ajout de la masterclass.");
             }

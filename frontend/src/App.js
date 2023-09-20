@@ -25,8 +25,10 @@ function App() {
               <Route path={"/discover"} element={<DiscoverPage/>} />
               <Route path={"/add-masterclass"} element={<AddMasterclassForm/>}/>
               <Route path={"/masterclass"} element={<MasterclassPage/>}/>
+              <Route path={"/upload-lesson/:id"} element={<UploadLesson/>}/>
               <Route path="/lessons/:lessonId" element={<LessonPage />} /> {/* Nouvelle route pour la page de leçon */}
-              <Route path={"/upload-lesson"} element={<UploadLesson/>}/>
+
+
             </Routes>
           </Router>
       </UserProvider>
