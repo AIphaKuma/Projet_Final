@@ -28,4 +28,7 @@ services:
     App\Security\JWTAuthenticator:
         arguments:
             $secretKey: '%env(JWT_SECRET_KEY)%'
+    App\Controller\SecurityController:
+        arguments:
+            $secretKey: '%env(JWT_SECRET_KEY)%'
 

@@ -16,7 +16,7 @@ function NavbarDashboard() {
 
 
     if (!user) {
-        return <div>Veuillez vous connecter pour accéder au tableau de bord.</div>;
+        return null;
     }
     return (
         <div className="navbar">
