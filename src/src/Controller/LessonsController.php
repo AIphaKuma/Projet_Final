@@ -146,23 +146,31 @@ class LessonsController extends AbstractController
     }
 
     private function transformLesson(Lessons $lesson): array
-    {
-        return [
-            'id' => $lesson->getId(),
-            'name' => $lesson->getName(),
-            'video' => $lesson->getVideos()->getLink(),
-            'time_stamp' => $lesson->getVideos()->getTimeStamps(),
-            'music_sheet' => $lesson->getMusicSheet()->getPath(),
-            'composer' => $lesson->getComposer(),
-            'duration' => $lesson->getDuration(),
-            'chapter' => $lesson->getChapter(),
-            'content' => $lesson->getContent(),
-            'composer' => $lesson->getComposer(),
-            'duration' => $lesson->getDuration(),
-            'created_at' => $lesson->getCreatedAt() ? $lesson->getCreatedAt()->format('Y-m-d H:i:s') : null,
-            'created_by' => $lesson->getCreatedBy() ? $lesson->getCreatedBy()->getUsername() : null // assuming created_by is a User entity with a getUsername method. Check for null in case it's not set.
-        ];
-    }
+        {
+            $timeStamps = $lesson->getVideos()->getTimeStamps();
+            $timeStampData = [];
+            foreach ($timeStamps as $timeStamp) {
+                $timeStampData[] = [
+                    'start_time' => $timeStamp->getStartTime(),
+                    'end_time' => $timeStamp->getEndTime(),
+                    'label' => $timeStamp->getLabel()
+                ];
+            }
+
+            return [
+                'id' => $lesson->getId(),
+                'name' => $lesson->getName(),
+                'video' => $lesson->getVideos()->getLink(),
+                'time_stamp' => $timeStampData,
+                'music_sheet' => $lesson->getMusicSheet()->getPath(),
+                'chapter' => $lesson->getChapter(),
+                'content' => $lesson->getContent(),
+                'composer' => $lesson->getComposer(),
+                'duration' => $lesson->getDuration(),
+                'created_at' => $lesson->getCreatedAt() ? $lesson->getCreatedAt()->format('Y-m-d H:i:s') : null,
+                'created_by' => $lesson->getCreatedBy() ? $lesson->getCreatedBy()->getUsername() : null // assuming created_by is a User entity with a getUsername method. Check for null in case it's not set.
+            ];
+        }
 }
 
 

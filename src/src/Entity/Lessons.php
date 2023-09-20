@@ -171,3 +171,4 @@ class Lessons
 
         return $this;
     }
+}

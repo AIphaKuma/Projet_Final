@@ -3,8 +3,10 @@ import TabsCard from "../../Components/Tabs";
 import MasterclassInfo from "../../Components/InfoCard";
 import axios from 'axios';
 import {useParams} from "react-router-dom";
+import YoutubePlayer from "../../Components/YoutubePlayer";
 
 import './style.scss'
+import YoutubeVideoPlayer from "../../Components/YoutubePlayer";
 
 function LessonPage() {
 
@@ -30,6 +32,7 @@ function LessonPage() {
     if (!lesson) {
         return <div>Loading...</div>;
     }
+
 
     const renderTab = () => {
         let element;
@@ -66,6 +69,8 @@ function LessonPage() {
         return <MasterclassInfo date={lesson.created_at} composer={lesson.composer} duree={lesson.duration} title={lesson.title} />;
     };
 
+
+
     return (
         <div className="masterclass-cours">
             <div className="header">
@@ -76,11 +81,13 @@ function LessonPage() {
             </div>
             <div className="masterclass-body-container">
                 <div className="video">
-                    <iframe width="1060" height="650"         src={`https://www.youtube.com/embed/${lesson.video}`}
-                            title="YouTube video player" frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen>
-                    </iframe>
+
+                    <YoutubeVideoPlayer video={lesson.video} timestamps={lesson.time_stamp.map((timestamp, index) => (
+                        { startTime: timestamp.start_time, endTime: timestamp.end_time, label: timestamp.label }
+                    ))} />
+
+
+
                 </div>
                 <div className="info">
                     {renderMasterclassesInfo()}
