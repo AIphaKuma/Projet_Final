@@ -37,7 +37,11 @@ class UploadController extends AbstractController
             $em->persist($musicSheet);
             $em->flush();
 
-            return $this->json(['message' => 'Upload réussie', 'path' => $musicSheet->getPath()]);
+            return $this->json([
+                'message' => 'Upload réussie',
+                'path' => $musicSheet->getPath(),
+                'id' => $musicSheet->getId()
+            ]);
 
         } catch (FileException $e) {
             // Handle exception if something happens during file upload
