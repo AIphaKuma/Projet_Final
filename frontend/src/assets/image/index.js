@@ -8,4 +8,5 @@ export default  {
     IconGoogle: require('./google.png'),
     IconApple: require('./Apple.png'),
     IconFacebook: require('./facebook1.png'),
+    Profile : require('./profile.png'),
 }

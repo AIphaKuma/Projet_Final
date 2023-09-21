@@ -30,3 +30,21 @@
 .masterclass-container{
   margin: 10px;
 }
+
+
+.pagination {
+  text-align: center; /* Alignement du texte au centre */
+  margin-top: 20px; /* Marge supérieure, ajustez selon vos besoins */
+}
+
+.pagination span {
+  margin: 0 5px; /* Espacement entre les numéros de page */
+}
+
+.pagination span:first-child {
+  margin-left: 0; /* Ajustez la marge à gauche pour le premier élément */
+}
+
+.pagination span:last-child {
+  margin-right: 0; /* Ajustez la marge à droite pour le dernier élément */
+}

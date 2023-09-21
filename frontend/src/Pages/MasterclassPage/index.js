@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PwButton from '../../Components/button';
 import MasterclassCard from '../../Components/Masterclass/MasterclassCard';
 import './style.scss';
 import Footer from '../../Components/Footer';
+import NavbarDashboard from "../../Components/NavbarDashboard";
 
 function MasterclassPage() {
     const [error, setError] = useState(null);
@@ -11,6 +11,9 @@ function MasterclassPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [lessons, setLessons] = useState([])
     const masterclassesPerPage = 5;
+    const [isDescendingOrder, setIsDescendingOrder] = useState(true);
+    const [selectedLevel, setSelectedLevel] = useState('');
+
 
     const getMasterclass = async () => {
         try {
@@ -27,6 +30,12 @@ function MasterclassPage() {
                 setError(err.message);
             }
         }
+    };
+    const filterMasterclassesByLevel = (level) => {
+        // Filtrer les masterclass en fonction du niveau
+        const filteredMasterclasses = masterclass.filter(m => m.level === level);
+        setMasterclasses(filteredMasterclasses);
+        setSelectedLevel(level);
     };
 
     const fetchLessonsForMasterclass = async (masterclassId) => {
@@ -93,6 +102,11 @@ function MasterclassPage() {
         ));
     };
 
+    const toggleOrder = () => {
+        setMasterclasses(prevMasterclasses => prevMasterclasses.slice().reverse());
+        setIsDescendingOrder(prevOrder => !prevOrder);
+    };
+
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const pageNumbers = [];
@@ -102,21 +116,25 @@ function MasterclassPage() {
 
     return (
         <>
+            <NavbarDashboard></NavbarDashboard>
             <div className="masterclasses">
                 <div className={'category-title'}>Nos Masterclass</div>
                 <div className={'title'}>Les meilleurs masterclass</div>
 
                 <div className="filter">
-                    <PwButton
-                        title={'Categorie'}
-                        variant={'primary'}
-                        size={'medium'}
-                    ></PwButton>
-                    <PwButton
-                        title={'Instrument'}
-                        variant={'primary'}
-                        size={'medium'}
-                    ></PwButton>
+                    <button onClick={toggleOrder}>
+                        Changer l'ordre {isDescendingOrder ? 'vers les plus anciennes' : 'vers les plus récentes'}
+                    </button>
+                    <button onClick={() => filterMasterclassesByLevel('facile')}>
+                        Filtrer par niveau Facile
+                    </button>
+                    <button onClick={() => filterMasterclassesByLevel('intermédiaire')}>
+                        Filtrer par niveau Intermédiaire
+                    </button>
+                    <button onClick={() => filterMasterclassesByLevel('difficile')}>
+                        Filtrer par niveau Difficile
+                    </button>
+
                 </div>
                 <div className={'masterclass-container'}>{renderMasterclasses()}</div>
                 <div className="pagination">

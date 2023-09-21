@@ -8,13 +8,15 @@ import './style.scss'
 function MasterclassCard({image,title,instrument, creator, comment, level, lessons, onClick}) {
 
     const [isLessonsVisible, setIsLessonsVisible] = useState(false);
+    const defaultImage = Image.MasterClass1;
+
 
     const toggleLessonsVisibility = () => {
         setIsLessonsVisible(!isLessonsVisible);
     };
     return (
         <div className="masterclass-card" onClick={onClick}>
-            <img src={image} alt={"masterclassimage"}/>
+            <img width="400px" height={"350px"} src={image || defaultImage} alt={"masterclassimage"}/>
             <div className="masterclass-card-text">
                 <p className="masterclass-creator">{creator}</p>
                 <p className="masterclass-title">{title}</p>
