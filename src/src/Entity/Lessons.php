@@ -181,6 +181,7 @@ class Lessons
     }
 
 
+
     /**
      * @return Collection<int, TimeStamp>
      */
