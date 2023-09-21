@@ -29,10 +29,10 @@ function MasterclassCard({image,title,instrument, creator, comment, level, lesso
                     </div>
                 </div>
                 <p className="masterclass-description">{comment}</p>
-                <div className="lessons">
-                    <button onClick={toggleLessonsVisibility}>
+                <div className="lessons" onClick={toggleLessonsVisibility}>
+
                         {isLessonsVisible ? 'Cacher les leçons' : 'Afficher les leçons'}
-                    </button>
+
                     {isLessonsVisible && (
                         <div className="lessons-container">
                             <h3>Lessons:</h3>
@@ -40,7 +40,7 @@ function MasterclassCard({image,title,instrument, creator, comment, level, lesso
                                 <ul>
                                     {lessons && Object.values(lessons).map((lesson, index) => (
                                         <li key={lesson.id} >
-                                            <Link to={`/lessons/${lesson.id}`} className="lesson-link"> Lesson ID: {lesson.id}, Name: {lesson.name}, Chapter: {lesson.Chapter}</Link>
+                                            <Link to={`/lessons/${lesson.id}`} className="lesson-link">  Name: {lesson.name}, Chapter: {lesson.Chapter}</Link>
                                         </li>
                                     ))}
                                 </ul>

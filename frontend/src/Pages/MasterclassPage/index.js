@@ -120,10 +120,11 @@ function MasterclassPage() {
                 </div>
                 <div className={'masterclass-container'}>{renderMasterclasses()}</div>
                 <div className="pagination">
-                    {pageNumbers.map((number) => (
-                        <span key={number} onClick={() => paginate(number)}>
-              {number}
-            </span>
+                    {pageNumbers.map((number, index) => (
+                        <span key={number}>
+                             {index > 0 && ' - '}
+                            <span onClick={() => paginate(number)}>{number}</span>
+                        </span>
                     ))}
                 </div>
             </div>
