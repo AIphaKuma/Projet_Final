@@ -9,4 +9,5 @@ export default  {
     IconApple: require('./Apple.png'),
     IconFacebook: require('./facebook1.png'),
     Profile : require('./profile.png'),
+    JeanBach: require('./jean-sebastien-bach.webp')
 }

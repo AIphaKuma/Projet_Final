@@ -59,7 +59,7 @@ function LessonPage() {
         } else if (activeTab === 1) {
             element = (
                 <>
-
+                    
                 </>
             )
         }
