@@ -20,7 +20,7 @@ function MiniProfile({link,username, notifications}) {
             </div>
             <div className="mini-profile-picture-text">
                 <span className="mini-profile-picture-username">{username}</span>
-                <i class="fa-solid fa-chevron-down"></i>
+                <i className="fa-solid fa-chevron-down"></i>
             </div>
 
 

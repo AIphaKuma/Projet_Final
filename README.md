@@ -1,25 +1,21 @@
-# Php-fpm-alpine x Nginx
-### Symfony | Docker
+# Projet Final P2023
 
-Avec MariaDB & MailDev
+ Stack tech :
+Back-End : Symfony | Front-End : React | BDD : MariaDB | API : Axios
 
 Pour lancer le projet :
-````shell
+````
 docker-compose up -d
-docker exec symfony_docker composer create-project symfony/skeleton html
-sudo chown -R $USER ./
+````
+Une fois le container monté lancée à l'interieur du container symfony_docker pour installer les dépendances:
+````
+cd html
+composer i
+````
+Ensuite revenez sur le terminal :
+````
+cd frontend
+npm i
+npm run start
 ````
 
-Pensez ensuite à aller exécuter toutes vos commandes depuis l'intérieur du container.
-
-Par exemple :
-````shell
-cd symfony_project
-composer require orm
-````
-(Demandez à Composer de NE PAS créer une config Docker pour la database)
-
-Enfin, modifiez la config DB dans le fichier .env de Symfony :
-````shell
-DATABASE_URL=mysql://root:ChangeMeLater@db:3306/symfony_db?serverVersion=mariadb-10.7.1
-````

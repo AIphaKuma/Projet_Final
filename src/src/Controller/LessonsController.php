@@ -133,8 +133,6 @@ class LessonsController extends AbstractController
                 // Capture des erreurs lors de la persistance
                 $failedLessons[] = ['data' => $lessonData, 'reason' => $e->getMessage()];
             }
-            $em->persist($lesson);
-            $createdLessonIds[] = $lesson->getId();
         }
 
         // Si aucune leçon n'a échoué, tout va bien
@@ -146,6 +144,7 @@ class LessonsController extends AbstractController
     }
 
     private function transformLesson(Lessons $lesson): array
+
         {
             $timeStamps = $lesson->getVideos()->getTimeStamps();
             $timeStampData = [];
@@ -171,6 +170,7 @@ class LessonsController extends AbstractController
                 'created_by' => $lesson->getCreatedBy() ? $lesson->getCreatedBy()->getUsername() : null // assuming created_by is a User entity with a getUsername method. Check for null in case it's not set.
             ];
         }
+
 }
 
 
