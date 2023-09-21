@@ -39,12 +39,12 @@ function Dashboard() {
                                     <Fontawesome />
                                     <i className="fa-solid fa-layer-group">
                                     </i>
-                                    <div className="dashboard-category">Dashboard</div>
+                                    <div className="dashboard-menu">Dashboard</div>
                                 </div>
                                 <div className={`icon-nav2 ${isSubMenuOpen ? 'sub-menu-open' : ''}`} onClick={toggleSubMenu}>
                                         <div className= "box-icon2">
                                         <i class="fa-solid fa-video"></i>
-                                        <div className="dashboard-category">Masterclass</div>
+                                        <div className="dashboard-menu">Masterclass</div>
                                         </div>
                                     
                                     <div className={subMenuClasses}>
@@ -58,22 +58,22 @@ function Dashboard() {
                                 <div className="icon-nav3">
                                     <i class="fa-regular fa-bell">
                                     </i>
-                                    <div className="dashboard-category">Notifications</div>
+                                    <div className="dashboard-menu">Notifications</div>
                                 </div>
                                 <div className="icon-nav4">
                                     <i class="fa-regular fa-message">
                                     </i>
-                                    <div className="dashboard-category">Messagerie</div>
+                                    <div className="dashboard-menu">Messagerie</div>
                                 </div>
                                 <div className="icon-nav5">
                                     <i class="fa-regular fa-calendar">
                                     </i>
-                                    <div className="dashboard-category">Rendez-vous</div>
+                                    <div className="dashboard-menu">Rendez-vous</div>
                                 </div>
                                 <div className="icon-nav6">
                                     <i class="fa-solid fa-arrow-right-from-bracket">
                                     </i>
-                                    <div className="dashboard-category">Déconnexion</div>
+                                    <div className="dashboard-menu">Déconnexion</div>
                                 </div>
 
                         </div>
@@ -95,7 +95,7 @@ function Dashboard() {
 
                         <div className="dashboard-right">
                                 <div className="accesprenium-box">
-                                  Torem ipsum dolor sit  ipsum dolor
+                                 Rejoignez notre communauté mondiale de +100k membres 
                                   <div className="photo-prenium"></div>
                                 </div>
                                 <div className="messagerie-box">

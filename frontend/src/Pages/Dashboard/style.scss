@@ -8,7 +8,8 @@
     width: 60%;
     border-radius: 20px;
     padding: 20px;
-    height: 100vh;
+    height: 700px;
+    
   }
 
   .dashboard-left{ 
@@ -16,17 +17,18 @@
     padding: 20px; 
     display: flex;
     flex-direction: column;
-    gap: 52px;
-    margin-left: auto;
-    margin-right: auto;
+    gap: 52px;  
     color: white;
   }
   .dashboard-right{
     width: 20%;
     padding: 20px;
-    height: 100vh;
     color: white;
   } 
+}
+.dashboard-menu{
+  font-size: 24px;
+  margin: 10px;
 }
 
 .sessioncard-box{
@@ -36,8 +38,8 @@
 }
 
 .accesprenium-box{
-    width: 222px;
-    font-size: 32px;
+    width: 224px;
+    font-size: 24px;
     margin-bottom: 52px;
     
 }
@@ -46,8 +48,8 @@
     height: 42px;
     background-color: violet;
     border-radius: 20px;
-    margin-top: -38px;
-    margin-left: 75px;
+    margin-top: -20px;
+    margin-left: 100px;
 }
 
 .messagerie-box{
@@ -137,6 +139,9 @@
     .dashboard-category{
         font-size: 20px;
     }
+    .dashboard-menu{
+        font-size: 20px;
+    }
     .sub-menu-item{
         font-size: 14px;
     }
@@ -145,6 +150,9 @@
     }
     .accesprenium-box{
         font-size: 20px;
+    }
+    .photo-prenium{
+        margin-top: 1px;
     }
     .dashboard-global-container .dashboard-center {
         width: 50%;
@@ -168,7 +176,9 @@
     .dashboard-category{
         font-size: 18px;
     }
-
+    .dashboard-menu{
+        display: none;
+    }
 }
 
 @media (max-width: 767px) {
@@ -178,12 +188,11 @@
     }
     .dashboard-global-container{
      .dashboard-center {
-        width: 52%;
+        width: 75%;
         padding: 16px;
      }
      .dashboard-left {
         width: 38%;
-        gap: 10px;
         align-items: flex-start;
      }
 
@@ -196,6 +205,9 @@
     .sub-menu-item{
         font-size: 12px;
     }
+    .icon-nav2.sub-menu-open .sub-menu {
+        display: none;
+    }    
 
     .sessioncard-box {
         align-items: center;
