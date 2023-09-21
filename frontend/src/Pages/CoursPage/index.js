@@ -3,22 +3,22 @@ import TabsCard from "../../Components/Tabs";
 import MasterclassInfo from "../../Components/InfoCard";
 import axios from 'axios';
 import {useParams} from "react-router-dom";
-import YoutubePlayer from "../../Components/YoutubePlayer";
 
-import './style.scss'
 
 import YoutubeVideoPlayer from "../../Components/YoutubePlayer";
 
 import NavbarDashboard from "../../Components/NavbarDashboard";
 
+import './style.scss'
+
+
 
 function LessonPage() {
 
-
     const [activeTab, setActiveTab] = useState(0);
-    const [masterclassInfo, setMasterclassesInfo] = useState([]); // Initialisé en tant qu'array vide
+    const [masterclassInfo, setMasterclassesInfo] = useState([]);
     const [lesson, setLesson] = useState(null);
-    const { lessonId } = useParams();  // Utilisez destructuring pour extraire lessonId du résultat de useParams
+    const { lessonId } = useParams();
 
     useEffect(() => {
         const fetchLesson = async () => {
@@ -50,7 +50,8 @@ function LessonPage() {
                         <p className="content-title gradient-text">
                             {lesson.timestamp}
                         </p>
-                        <p className="content">Jacques Rouvier et son élève Julien Braidi travaillent à développer une trajectoire musicale et à jouer de manière expressive. De plus, la paire travaille sur des aspects plus techniques tels que jouer avec une bonne posture, doigté et créer un son plus profond en appliquant plus de pression sur les touches du bout des doigts.
+                        <p className="content">
+                            {lesson.content}
                         </p>
                     </div>
 
@@ -59,7 +60,13 @@ function LessonPage() {
         } else if (activeTab === 1) {
             element = (
                 <>
-                    
+                    <iframe
+                        src={`${lesson.music_sheet}`}
+                        title="Aperçu du PDF"
+                        width="100%"
+                        height="500px"
+                    />
+
                 </>
             )
         }

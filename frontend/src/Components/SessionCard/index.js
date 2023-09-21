@@ -1,11 +1,11 @@
 // Dashboard.js
 import React from 'react';
 import Image from "../../assets/image";
-
+import CircleProgressBar from "../CircleProgressBar";
 
 
 import './style.scss'
-import CircleProgressBar from "../CircleProgressBar";
+
 
 
 function SessionCard({title,pourcentage, date,image}) {

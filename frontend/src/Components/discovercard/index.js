@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-
-import './style.scss'
 import PwButton from "../button";
 import {Link} from "react-router-dom";
+
+import './style.scss'
 
 function DiscoverCard({title}) {
 

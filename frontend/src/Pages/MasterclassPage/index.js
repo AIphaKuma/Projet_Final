@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MasterclassCard from '../../Components/Masterclass/MasterclassCard';
-import './style.scss';
+
 import Footer from '../../Components/Footer';
 import NavbarDashboard from "../../Components/NavbarDashboard";
+
+import './style.scss';
 
 function MasterclassPage() {
     const [error, setError] = useState(null);
