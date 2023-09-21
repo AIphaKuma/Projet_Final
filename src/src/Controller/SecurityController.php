@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Entity\Role;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,15 +22,17 @@ class SecurityController extends AbstractController
     private UserPasswordHasherInterface $passwordEncoder;
     private UsersRepository $userRepository;
     private JWTHelper $jwtHelper;
-
+    private $secretKey;
     public function __construct(
         UserPasswordHasherInterface $passwordEncoder,
         UsersRepository $userRepository,
-        JWTHelper $jwtHelper )
+        JWTHelper $jwtHelper,
+        $secretKey)
     {
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
         $this -> jwtHelper = $jwtHelper;
+        $this->secretKey = $secretKey;
     }
 
     #[Route('/login', name: 'login')]
@@ -56,7 +62,7 @@ class SecurityController extends AbstractController
                 false,         // Sécurisé (utilisez true si vous êtes en HTTPS)
                 true,          // httpOnly
                 false,
-                Cookie::SAMESITE_LAX,
+                Cookie::SAMESITE_LAX, //
             )
         );
         $createdCookieValue = $response->headers->getCookies()[0]->getValue();
@@ -89,7 +95,12 @@ class SecurityController extends AbstractController
         $country = $data['country'] ?? '';
         $phoneNumber = $data['phone_number'] ?? null;
         $email = $data['mail'] ?? '';
-        $role = $data['role'] ?? 2;
+        $roleRepository = $entityManager->getRepository(Role::class);
+        $role = $roleRepository->find(2);  // ID 2 est ici en dur
+
+        if (!$role) {
+            return new JsonResponse(['error' => 'Rôle non trouvé'], 400);
+        }
 
         // Vérifie si l'utilisateur existe déjà
         $existingUser = $this->userRepository->findOneBy(['username' => $username]);
@@ -108,6 +119,7 @@ class SecurityController extends AbstractController
         $user->setPhoneNumber($phoneNumber);
         $user->setMail($email);
         $user->setRole($role);
+        $user->setCategory(0);
         $user->setCreatedAt(new \DateTimeImmutable());
 
         $entityManager->persist($user);
@@ -123,6 +135,41 @@ class SecurityController extends AbstractController
             ]
         ], 201);
     }
+
+    #[Route('/check_user', name:'check_user')]
+    public function getAuthenticatedUser(Request $request): Response
+    {
+        // Récupérez le token depuis le cookie.
+        $token = $request->cookies->get('token');
+        if (!$token) {
+            return new JsonResponse(['error' => 'Token absent'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        try {
+            // Décodage du JWT
+            $jwt = JWT::decode($token, new Key($this->secretKey, 'HS256'));
+
+            // Récupération de l'ID et de l'username
+            $userId = $jwt->data->id ?? null;
+            $username = $jwt->data->username ?? null;
+
+            // Si l'un des deux est manquant, le token est invalide
+            if ($userId === null || $username === null) {
+                throw new \Exception("Informations utilisateur manquantes dans le token");
+            }
+
+            // Renvoi des informations de l'utilisateur
+            return new JsonResponse([
+                'id' => $userId,
+                'username' => $username
+            ]);
+
+        } catch (\Exception $exception) {
+            // Si une exception est levée, cela signifie probablement que le JWT est invalide.
+            return new JsonResponse(['error' => 'Token invalide'], Response::HTTP_UNAUTHORIZED);
+        }
+    }
+
 
     // Marche pas encore à fix
     #[Route('/logout', name: 'logout')]

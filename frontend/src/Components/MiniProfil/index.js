@@ -1,10 +1,11 @@
 import React from 'react';
+import Fontawesome from '../../api/Fontawesome';
 
 
 
 
 import './style.scss'
-import Fontawesome from '../../api/Fontawesome';
+import Image from "../../assets/image";
 
 
 function MiniProfile({link,username, notifications}) {
@@ -16,11 +17,11 @@ function MiniProfile({link,username, notifications}) {
                 <div className="mini-notifications">
                     <span className="mini-number">{notifications}</span>
                 </div>
-                <img  src={link} alt={"profilepicture"} className="circle-image"/>
+                <img  src={link || Image.Profile} alt={"profilepicture"} className="circle-image"/>
             </div>
             <div className="mini-profile-picture-text">
                 <span className="mini-profile-picture-username">{username}</span>
-                <i class="fa-solid fa-chevron-down"></i>
+                <i className="fa-solid fa-chevron-down"></i>
             </div>
 
 

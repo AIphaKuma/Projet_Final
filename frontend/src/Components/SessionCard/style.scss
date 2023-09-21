@@ -1,8 +1,11 @@
 @import "../../styles/common/colors";
 
+.session-card-container1{
+  display: flex;
+  border-radius: 20px;
+}
 .session-card-container{
   display: flex;
-  background-color: $lightgrey;
   border-radius: 20px;
   padding: 20px;
 }

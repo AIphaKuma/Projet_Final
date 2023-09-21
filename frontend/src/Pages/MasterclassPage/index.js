@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PwButton from '../../Components/button';
 import MasterclassCard from '../../Components/Masterclass/MasterclassCard';
 import './style.scss';
 import Footer from '../../Components/Footer';
+import NavbarDashboard from "../../Components/NavbarDashboard";
 
 function MasterclassPage() {
     const [error, setError] = useState(null);
@@ -11,7 +11,9 @@ function MasterclassPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [lessons, setLessons] = useState([])
     const masterclassesPerPage = 5;
-    const [activeFilter, setActiveFilter] = useState(null);
+    const [isDescendingOrder, setIsDescendingOrder] = useState(true);
+    const [selectedLevel, setSelectedLevel] = useState('');
+
 
     const getMasterclass = async () => {
         try {
@@ -28,6 +30,12 @@ function MasterclassPage() {
                 setError(err.message);
             }
         }
+    };
+    const filterMasterclassesByLevel = (level) => {
+        // Filtrer les masterclass en fonction du niveau
+        const filteredMasterclasses = masterclass.filter(m => m.level === level);
+        setMasterclasses(filteredMasterclasses);
+        setSelectedLevel(level);
     };
 
     const fetchLessonsForMasterclass = async (masterclassId) => {
@@ -46,16 +54,13 @@ function MasterclassPage() {
 
     useEffect(() => {
         const fetchLessonsForAllMasterclasses = async () => {
-            // Fetch lessons for all masterclasses
             const lessonsPromises = masterclass.map(async (m) => {
                 const lessonsForMasterclass = await fetchLessonsForMasterclass(m.id);
                 return { masterclassId: m.id, lessons: lessonsForMasterclass };
             });
 
-            // Wait for all the promises to resolve
             const allLessons = await Promise.all(lessonsPromises);
 
-            // Update lessons state once for all masterclasses
             const updatedLessons = allLessons.reduce((acc, lesson) => {
                 acc[lesson.masterclassId] = lesson.lessons;
                 return acc;
@@ -63,23 +68,11 @@ function MasterclassPage() {
             setLessons(updatedLessons);
         };
 
-        // Call the fetch function if masterclass changes
         if (masterclass.length > 0) {
             fetchLessonsForAllMasterclasses();
         }
-    }, [masterclass]);// Récupérer les leçons chaque fois que les masterclasses changent
+    }, [masterclass]);
 
-
-    const applyFilter = (filter) => {
-        // Apply the filter and set the active filter
-        // Implement your logic to filter the masterclasses based on the selected filter
-        // For simplicity, let's assume you have a field in masterclass called 'category'
-        setActiveFilter(filter);
-        // Modify this line based on your filter logic
-        const filteredMasterclasses = masterclass.filter((m) => m.category === filter);
-        setMasterclasses(filteredMasterclasses);
-        setCurrentPage(1); // Reset to the first page after applying the filter
-    };
 
 
 
@@ -109,6 +102,11 @@ function MasterclassPage() {
         ));
     };
 
+    const toggleOrder = () => {
+        setMasterclasses(prevMasterclasses => prevMasterclasses.slice().reverse());
+        setIsDescendingOrder(prevOrder => !prevOrder);
+    };
+
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const pageNumbers = [];
@@ -118,31 +116,33 @@ function MasterclassPage() {
 
     return (
         <>
+            <NavbarDashboard></NavbarDashboard>
             <div className="masterclasses">
                 <div className={'category-title'}>Nos Masterclass</div>
                 <div className={'title'}>Les meilleurs masterclass</div>
 
                 <div className="filter">
-                    <PwButton
-                        title={'Categorie'}
-                        variant={'primary'}
-                        size={'medium'}
-                        onClick={() => applyFilter('Categorie')}
-                    ></PwButton>
-                    <PwButton
-                        title={'Instrument'}
-                        variant={'primary'}
-                        size={'medium'}
-                        onClick={() => applyFilter('Instrument')}
-                    ></PwButton>
-                    {/* Add more buttons for different filters */}
+                    <button onClick={toggleOrder}>
+                        Changer l'ordre {isDescendingOrder ? 'vers les plus anciennes' : 'vers les plus récentes'}
+                    </button>
+                    <button onClick={() => filterMasterclassesByLevel('facile')}>
+                        Filtrer par niveau Facile
+                    </button>
+                    <button onClick={() => filterMasterclassesByLevel('intermédiaire')}>
+                        Filtrer par niveau Intermédiaire
+                    </button>
+                    <button onClick={() => filterMasterclassesByLevel('difficile')}>
+                        Filtrer par niveau Difficile
+                    </button>
+
                 </div>
                 <div className={'masterclass-container'}>{renderMasterclasses()}</div>
                 <div className="pagination">
-                    {pageNumbers.map((number) => (
-                        <span key={number} onClick={() => paginate(number)}>
-              {number}
-            </span>
+                    {pageNumbers.map((number, index) => (
+                        <span key={number}>
+                             {index > 0 && ' - '}
+                            <span onClick={() => paginate(number)}>{number}</span>
+                        </span>
                     ))}
                 </div>
             </div>

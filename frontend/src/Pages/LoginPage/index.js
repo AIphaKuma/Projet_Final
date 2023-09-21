@@ -56,8 +56,8 @@ function LoginPage() {
 
                      
 
-                        <div class="slider">
-                            <div class="slide">
+                        <div className="slider">
+                            <div className="slide">
                                 <h2>Etudier avec les meilleurs musiciens du monde</h2>
                                 <label className='text4'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
                                 text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
@@ -65,10 +65,10 @@ function LoginPage() {
                             </div>
                         </div>
 
-                        <div class="slider-dots">
-                            <span class="dot1"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                        <div className="slider-dots">
+                            <span className="dot1"></span>
+                            <span className="dot"></span>
+                            <span className="dot"></span>
                         </div>
 
 

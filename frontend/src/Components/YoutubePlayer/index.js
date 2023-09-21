@@ -1,33 +1,38 @@
 import React, { useState } from 'react';
 
-const YouTubePlayer = () => {
-    const [timestamp, setTimestamp] = useState(0); // Le timestamp initial est 0 (début de la vidéo)
+function YoutubeVideoPlayer({video,timestamps }) {
+    const [currentTimestamp, setCurrentTimestamp] = useState(0);
 
-    const handleTimestampChange = () => {
-        const newTimestamp = parseFloat(prompt('Entrez le nouveau timestamp (en secondes) :'));
-        if (!isNaN(newTimestamp) && newTimestamp >= 0) {
-            setTimestamp(newTimestamp);
-        } else {
-            alert('Veuillez entrer un timestamp valide (nombre positif).');
-        }
+    const handleTimestampClick = (timestamp) => {
+        setCurrentTimestamp(timestamp);
+        console.log(timestamp);
     };
 
-    const embedUrl = `https://www.youtube.com/embed/VIDEO_ID?start=${timestamp}`;
+
 
     return (
         <div>
-            <h2>Vidéo YouTube</h2>
-            <p>Timestamp actuel : {timestamp} secondes</p>
-            <button onClick={handleTimestampChange}>Changer le timestamp</button>
             <iframe
-                width="560"
-                height="315"
-                src={embedUrl}
+                width="860"
+                height="550"
+                src={`https://www.youtube.com/embed/${video}?start=${currentTimestamp}`}
                 title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
+                frameBorder="0"
+                allowFullScreen
+            ></iframe>
+
+            <div>
+                <h2>Timestamps</h2>
+
+                    {timestamps.map((timestamp, index) => (
+                        <button key={index} onClick={() => handleTimestampClick(timestamp.startTime)}>
+                            {timestamp.label}
+                        </button>
+                    ))}
+
+            </div>
         </div>
     );
-};
+}
 
-export default YouTubePlayer;
+export default YoutubeVideoPlayer;

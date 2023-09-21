@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from '../../axios/axiosConfig';
 
-function UploadMusicSheet(onUploadSuccess) {
+function UploadMusicSheet({ onUploadSuccess }) {
     // état pour stocker le fichier
+    console.log("Prop onUploadSuccess:", onUploadSuccess);
+
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -33,8 +35,9 @@ function UploadMusicSheet(onUploadSuccess) {
             });
             setMessage(response.data.message);
 
-            if (response.data && response.data.success && onUploadSuccess) {
-                onUploadSuccess(response.data.path); // appel de la fonction de succès
+            if (response.data && response.data.id && onUploadSuccess) {
+                console.log("Réponse de l'upload:", response.data);
+                onUploadSuccess(response.data.id); // appel de la fonction de succès
             }
 
         } catch (error) {
@@ -45,10 +48,10 @@ function UploadMusicSheet(onUploadSuccess) {
     };
 
     return (
-        <div>
+        <div className="upload-container">
             <h3>Upload de Partitions Musicales</h3>
-            <input type="file" onChange={handleFileChange} />
-            <button onClick={handleUpload} disabled={isLoading}>Upload</button>
+            <input type="file" accept=".pdf" onChange={handleFileChange} className="inputFile" />
+            <button onClick={handleUpload} disabled={isLoading}>UPLOAD</button>
             {message && <p>{message}</p>}
         </div>
     );

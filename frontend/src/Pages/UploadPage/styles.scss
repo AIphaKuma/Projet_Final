@@ -1,0 +1,85 @@
+.form {
+  margin: 0vw 4vw 0vw 4vw;
+}
+
+h3 {
+  color: white;
+}
+
+.group {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.group input {
+  color: white;
+  font-size: 18px;
+  display: block;
+  width: 30vw;
+  height: 52px;
+  border: 1px solid white;
+  border-radius: 16px;
+  background-color: #00000025;
+  outline: none;
+  margin-bottom: 1vw;
+  padding-left: 40px; /* Espace pour le label quand il est en haut */
+}
+
+.upload-container input {
+  color: white;
+  font-size: 18px;
+  display: block;
+  width: 16vw;
+  max-width: 100%;
+  height: 1vw;
+  border: 1px dashed white;
+  border-radius: 16px;
+  background-color: #00000025;
+  outline: none;
+  padding: 20px;
+}
+
+
+button {
+  align-items: flex-start;
+  background-color: #cc57d2;
+  border-radius: 32px;
+  display: inline-flex;
+  gap: 10px;
+  padding: 16px 50px;
+  margin: 15px 15px 15px 0;
+  position: relative;
+  color: floralwhite;
+  font-size: 16px;
+}
+
+.group label {
+  color: #fff;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  left: 10px; /* ou l'offset que vous préférez */
+  top: 35%;
+  transform: translateY(-50%);
+  transition: 0.2s ease all;
+}
+
+.group.filled label, .group input:focus ~ label {
+  top: 10px;
+  font-size: 10px;
+  color: #fff;
+}
+
+textarea {
+  color: white;
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 16px;
+  background-color: #00000025;
+  font-size: 16px;
+  resize: none;
+}

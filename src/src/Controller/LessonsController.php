@@ -70,31 +70,43 @@ class LessonsController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $user = $this->getUser();
-
         if (!$data || !is_array($data)) {
             return $this->json(['message' => 'Données invalides'], 400);
         }
 
         $createdLessonIds = [];
+        $failedLessons = [];
 
-        //Boucle sur les données envoyées
+        //Boucle sur les données envoyées par l'utilisateur pour créer les leçons une par une
         foreach ($data as $lessonData) {
             if (!isset($lessonData['name']) || !isset($lessonData['videos']) || !isset($lessonData['masterclass_id'])) {
-                continue; // Ignore this lesson, or you can also return an error.
+                $failedLessons[] = ['data' => $lessonData, 'reason' => 'Données de la leçon incomplètes'];
+                continue;
+            }
+
+            //Recuperation de la video liée à la leçon
+            $videoLink = $lessonData['videos'];
+            $video = $em->getRepository(Videos::class)->findOneBy(['link' => $videoLink]);
+
+            // Si la vidéo n'existe pas, créez une nouvelle vidéo
+            if (!$video) {
+                $video = new Videos();
+                $video->setLink($videoLink);
+                $em->persist($video);
             }
 
             //Recuperation des entités liées à la leçon
-            $video = $em->getRepository(Videos::class)->find($lessonData['videos']);
             $masterclass = $em->getRepository(Masterclass::class)->find($lessonData['masterclass_id']);
-            $musicSheetId = $lessonData['music_sheet_id'];
-            $musicSheet = $em->getRepository(MusicSheet::class)->find($musicSheetId);
+            $musicSheet = intval($lessonData['music_sheet_id']);
+            $musicSheetId = $em->getRepository(MusicSheet::class)->find($musicSheet);
+
 
             //Recuperation du dernier chapitre de la masterclass
             $lastLesson = $this->lessonsRepository->findOneBy(['masterclass' => $masterclass], ['Chapter' => 'DESC']);
             $currentChapterNumber = $lastLesson ? $lastLesson->getChapter() + 1 : 1;
 
             // Gestion d'erreur a faire
-            if (!$video || !$masterclass || !$musicSheet ) {
+            if (!$video || !$masterclass || !$musicSheetId ) {
                 continue; 
             }
 
@@ -103,39 +115,62 @@ class LessonsController extends AbstractController
             $lesson = new Lessons();
             $lesson->setName($lessonData['name']);
             $lesson->setVideos($video);
-            $lesson->setMusicSheet($musicSheet);
+            $lesson->setMusicSheet($musicSheetId);
             $lesson->setCreatedAt(new \DateTimeImmutable());
             $lesson->setCreatedBy($user);
             $lesson->setMasterclass($masterclass);
             $lesson->setChapter($currentChapterNumber);
             $lesson->setContent($lessonData['content']);
+            $lesson->setDuration($lessonData['duration']);
+            $lesson->setComposer($lessonData['composer']);
+
 
             //Ajout de la leçon à la masterclass
-            $em->persist($lesson);
-            $createdLessonIds[] = $lesson->getId();
+            try {
+                $em->persist($lesson);
+                $em->flush();$createdLessonIds[] = $lesson->getId();
+            } catch (\Exception $e) {
+                // Capture des erreurs lors de la persistance
+                $failedLessons[] = ['data' => $lessonData, 'reason' => $e->getMessage()];
+            }
         }
 
-        $em->flush();
-
-        return $this->json(['message' => 'Leçons ajoutées', 'created_ids' => $createdLessonIds]);
+        // Si aucune leçon n'a échoué, tout va bien
+        if (empty($failedLessons)) {
+            return $this->json(['message' => 'Leçons ajoutées', 'created_ids' => $createdLessonIds]);
+        } else {
+            return $this->json(['message' => "Certaines leçons n'ont pas été ajoutées", 'created_ids' => $createdLessonIds, 'failed_lessons' => $failedLessons], 400);
+        }
     }
 
     private function transformLesson(Lessons $lesson): array
-    {
-        return [
-            'id' => $lesson->getId(),
-            'name' => $lesson->getName(),
-            'video' => $lesson->getVideos()->getLink(),
-            'time_stamp' => $lesson->getVideos()->getTimeStamps(),
-            'music_sheet' => $lesson->getMusicSheet()->getPath(),
-            'composer' => $lesson->getComposer(),
-            'duration' => $lesson->getDuration(),
-            'chapter' => $lesson->getChapter(),
-            'content' => $lesson->getContent(),
-            'created_at' => $lesson->getCreatedAt() ? $lesson->getCreatedAt()->format('Y-m-d H:i:s') : null,
-            'created_by' => $lesson->getCreatedBy() ? $lesson->getCreatedBy()->getUsername() : null // assuming created_by is a User entity with a getUsername method. Check for null in case it's not set.
-        ];
-    }
+
+        {
+            $timeStamps = $lesson->getVideos()->getTimeStamps();
+            $timeStampData = [];
+            foreach ($timeStamps as $timeStamp) {
+                $timeStampData[] = [
+                    'start_time' => $timeStamp->getStartTime(),
+                    'end_time' => $timeStamp->getEndTime(),
+                    'label' => $timeStamp->getLabel()
+                ];
+            }
+
+            return [
+                'id' => $lesson->getId(),
+                'name' => $lesson->getName(),
+                'video' => $lesson->getVideos()->getLink(),
+                'time_stamp' => $timeStampData,
+                'music_sheet' => $lesson->getMusicSheet()->getPath(),
+                'chapter' => $lesson->getChapter(),
+                'content' => $lesson->getContent(),
+                'composer' => $lesson->getComposer(),
+                'duration' => $lesson->getDuration(),
+                'created_at' => $lesson->getCreatedAt() ? $lesson->getCreatedAt()->format('Y-m-d H:i:s') : null,
+                'created_by' => $lesson->getCreatedBy() ? $lesson->getCreatedBy()->getUsername() : null // assuming created_by is a User entity with a getUsername method. Check for null in case it's not set.
+            ];
+        }
+
 }
 
 

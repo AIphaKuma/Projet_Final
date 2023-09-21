@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import PwButton from "../../Components/button";
+import {Select} from "@mui/material";
 
 const config = {
     headers: {
@@ -42,9 +44,9 @@ const AddMasterclassForm = () => {
                 comment
             }, config);
 
-            if (response.data && response.data.message === 'Masterclass added successfully') {
+            if (response.data && response.data.message === 'Masterclass ajouté') {
                 alert('Masterclass ajoutée avec succès!');
-                Navigate('/dashboard');
+                Navigate(`/upload-lesson/${response.data.id}`);
             } else {
                 setErrorMessage("Erreur lors de l'ajout de la masterclass.");
             }
@@ -57,20 +59,26 @@ const AddMasterclassForm = () => {
         <div>
             <div>
                 <h2>Ajouter une Masterclass</h2>
-                <input type="text" name="name" value={name} placeholder="Titre" onChange={(e) => setName(e.target.value)} />
-                <select name="category_id" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                <div className="group">
+                    <input type="text" name="name" value={name} placeholder="Titre" onChange={(e) => setName(e.target.value)} />
+                </div>
+                <Select name="category_id" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
                     <option value="" disabled>Sélectionnez une catégorie</option>
                     {categories.map(category => (
                         <option key={category.id} value={category.id}>
                             {category.name}
                         </option>
                     ))}
-                </select>
-                <input type="text" name="level" value={level} placeholder="Niveau" onChange={(e) => setLevel(e.target.value)} />
-                <input type="text" name="comment" value={comment} placeholder="Comment" onChange={(e) => setComment(e.target.value)} />
+                </Select>
+                <div className="group">
+                    <input type="text" name="level" value={level} placeholder="Niveau" onChange={(e) => setLevel(e.target.value)} />
+                </div>
+                <div className="grou    p">
+                    <input type="text" name="comment" value={comment} placeholder="Comment" onChange={(e) => setComment(e.target.value)} />
+                </div>
             </div>
             {errorMessage && <div className="error">{errorMessage}</div>}
-            <button onClick={addMasterclass}>Ajouter</button>
+            <button onClick={addMasterclass} className="add-btn">Ajouter</button>
         </div>
     );
 };

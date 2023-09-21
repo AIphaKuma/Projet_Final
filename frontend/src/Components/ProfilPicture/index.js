@@ -5,6 +5,7 @@ import React from 'react';
 
 
 import './style.scss'
+import Image from "../../assets/image";
 
 
 function ProfilePicture({link,username,role, notifications}) {
@@ -23,7 +24,7 @@ function ProfilePicture({link,username,role, notifications}) {
                 <div className="notifications">
                     <span className="number">{notifications}</span>
                 </div>
-                <img  src={link} alt={"profilepicture"} className="circle-image"/>
+                <img  src={link || Image.Profile} alt={"profilepicture"} className="circle-image"/>
             </div>
             <div className="profile-picture-text">
                 <p className="profile-picture-username">Bonjour ,{username}</p>

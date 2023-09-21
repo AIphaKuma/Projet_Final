@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LessonsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LessonsRepository::class)]
@@ -42,13 +44,17 @@ class Lessons
     #[ORM\Column(type: 'text')]
     private ?string $content = null;
 
-
     #[ORM\Column(length: 255)]
     private ?string $composer = null;
 
     #[ORM\Column]
     private ?int $duration = null;
 
+
+    public function __construct()
+    {
+        $this->timestamp = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,7 +156,6 @@ class Lessons
         return $this;
     }
 
-
     public function getComposer(): ?string
     {
         return $this->composer;
@@ -164,7 +169,6 @@ class Lessons
     }
 
     public function getDuration(): ?int
-
     {
         return $this->duration;
     }
@@ -176,7 +180,37 @@ class Lessons
         return $this;
     }
 
+
+
+    /**
+     * @return Collection<int, TimeStamp>
+     */
+    public function getTimestamp(): Collection
+    {
+        return $this->timestamp;
+    }
+
+    public function addTimestamp(TimeStamp $timestamp): static
+    {
+        if (!$this->timestamp->contains($timestamp)) {
+            $this->timestamp->add($timestamp);
+            $timestamp->setLessons($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTimestamp(TimeStamp $timestamp): static
+    {
+        if ($this->timestamp->removeElement($timestamp)) {
+            // set the owning side to null (unless already changed)
+            if ($timestamp->getLessons() === $this) {
+                $timestamp->setLessons(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
-
-
 

@@ -75,9 +75,9 @@ const handleSubmit = async (e) => {
                     <button type="submit" className='button-form'>Se connecter</button>
 
                     <div className="frame">
-                    <div class="horizontal-line"></div>
+                    <div className="horizontal-line"></div>
                     <div className="text-wrapper">Ou Continue Avec</div>
-                    <div class="horizontal-line"></div>
+                    <div className="horizontal-line"></div>
                  </div>    
                 <div className="frame2">
                     <div className="google">
